@@ -20,8 +20,19 @@ import { LayoutModule } from './layout/layout.module';
 // *******************************************************************************
 // Pages
 
-import { HomeComponent } from './home/home.component';
+
 import { Page2Component } from './page-2/page-2.component';
+import { LoginComponent } from './users/login/login.component';
+import { ConfirmPageComponent } from './users/confirm-page/confirm-page.component';
+import { SetPasswordComponent } from './users/set-password/set-password.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
+import { AllUsersComponent } from './users/all-users/all-users.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
+import { ChangePasswordComponent } from './users/change-password/change-password.component';
+import { UserActivitiesComponent } from './users/user-activities/user-activities.component';
+
+
 
 // *******************************************************************************
 //
@@ -32,8 +43,18 @@ import { Page2Component } from './page-2/page-2.component';
     NotFoundComponent,
 
     // Pages
-    HomeComponent,
-    Page2Component
+    Page2Component,
+    LoginComponent,
+    ConfirmPageComponent,
+    SetPasswordComponent,
+    AddUserComponent,
+    AllUsersComponent,
+    UserProfileComponent,
+    EditProfileComponent,
+    ChangePasswordComponent,
+    UserActivitiesComponent,
+
+   
   ],
 
   imports: [
