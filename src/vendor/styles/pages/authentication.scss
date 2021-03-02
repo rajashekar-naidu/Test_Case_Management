@@ -27,6 +27,10 @@ $authentication-4-inner-max-width: 800px !default;
 
   &.authentication-2 .authentication-inner {
     max-width: $authentication-2-inner-max-width;
+    background: linear-gradient(105deg,lightgreen, transparent);
+    color:honeydew;
+    margin: 10px 0 20px;
+    padding: 0px 0px 0px;
   }
 
   &.authentication-3 {

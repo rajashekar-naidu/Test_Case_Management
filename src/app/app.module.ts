@@ -1,12 +1,17 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularMaterialModule } from './angular-material.module';
 
 // *******************************************************************************
 // NgBootstrap
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+/* Angular Flex Layout */
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ClipboardModule } from 'ngx-clipboard'; 
 
 // *******************************************************************************
 // App
@@ -21,7 +26,6 @@ import { LayoutModule } from './layout/layout.module';
 // Pages
 
 
-import { Page2Component } from './page-2/page-2.component';
 import { LoginComponent } from './users/login/login.component';
 import { ConfirmPageComponent } from './users/confirm-page/confirm-page.component';
 import { SetPasswordComponent } from './users/set-password/set-password.component';
@@ -31,7 +35,7 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { UserActivitiesComponent } from './users/user-activities/user-activities.component';
-
+import { AuthService } from './_services/auth.services';
 
 
 // *******************************************************************************
@@ -43,7 +47,6 @@ import { UserActivitiesComponent } from './users/user-activities/user-activities
     NotFoundComponent,
 
     // Pages
-    Page2Component,
     LoginComponent,
     ConfirmPageComponent,
     SetPasswordComponent,
@@ -63,16 +66,23 @@ import { UserActivitiesComponent } from './users/user-activities/user-activities
 
     // App
     AppRoutingModule,
-    LayoutModule
+    LayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AngularMaterialModule,
+    FlexLayoutModule,
+    ClipboardModule,
   ],
 
   providers: [
     Title,
-    AppService
+    AppService,
+    AuthService,
   ],
 
-  bootstrap: [
-    AppComponent
-  ]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

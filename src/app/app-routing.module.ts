@@ -11,7 +11,6 @@ import { Layout2Component } from './layout/layout-2/layout-2.component';
 // *******************************************************************************
 // Pages
 
-import { Page2Component } from './page-2/page-2.component';
 import { LoginComponent } from './users/login/login.component';
 import { ConfirmPageComponent } from './users/confirm-page/confirm-page.component';
 import { SetPasswordComponent } from './users/set-password/set-password.component';
