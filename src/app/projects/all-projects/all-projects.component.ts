@@ -5,36 +5,38 @@ import { AppService } from 'src/app/app.service';
 import { AuthService } from 'src/app/_services/auth.services';
 
 @Component({
-  selector: 'app-all-users',
-  templateUrl: './all-users.component.html',
-  styleUrls: ['./all-users.component.scss']
+  selector: 'app-all-projects',
+  templateUrl: './all-projects.component.html',
+  styleUrls: ['./all-projects.component.scss']
 })
-export class AllUsersComponent implements OnInit {
-  isRTL: boolean;  
+export class AllProjectsComponent implements OnInit {
+  isRTL: boolean;
+  users:any;
   cantFetchAllUserDetails:boolean;
   cantRemoveUser:boolean;
   length;
 
-  constructor(private http:HttpClient ,private _appService:AppService, private _router:Router, private _auth:AuthService) {
-    this._appService.pageTitle = 'Users';
+
+  constructor(private http: HttpClient, private _appService:AppService, private _router:Router, private _auth:AuthService) { 
+    this._appService.pageTitle = 'Projects';
     this.isRTL = _appService.isRTL;
-    //this.loadData();
-    this.getAllUserDetails();
-   }
+    this.loadData();
+  }
 
    // Filters
 
  // filterVerified = 'Any';
-  filterRole = 'Any';
-  // filterStatus = 'Any';
- // filterLatestActivity = [null, null];
+ //filterRole = 'Any';
+ // filterStatus = 'Any';
+ filterStartDate = [null, null];
+ filterDeadLine = [null, null];
 
 
   // Table
 
   // Options
   dataUrl = 'assets/json/pages_users_list.json';
-  searchKeys = ['id', 'name', 'email'];
+  searchKeys = ['id', 'account', 'email', 'name'];
   sortBy = 'id';
   sortDesc = true;
   perPage = 10;
@@ -46,13 +48,13 @@ export class AllUsersComponent implements OnInit {
   usersData: object[] = [];
   originalUsersData: object[] = [];
 
-  // loadData() {
-  //   this.http.get(this.dataUrl)
-  //     .subscribe((data: any) => {
-  //       this.originalUsersData = data.slice(0);
-  //       this.update();
-  //     });
-  // }
+  loadData() {
+    this.http.get(this.dataUrl)
+      .subscribe((data: any) => {
+        this.originalUsersData = data.slice(0);
+        this.update();
+      });
+  }
 
   get totalPages() {
     return Math.ceil(this.totalItems / this.perPage);
@@ -70,7 +72,7 @@ export class AllUsersComponent implements OnInit {
   filter(data) {
     const filter = this.filterVal.toLowerCase();
     return !filter ?
-      data :
+      data.slice(0) :
       data.filter(d => {
         return Object.keys(d)
           .filter(k => this.searchKeys.includes(k))
@@ -82,7 +84,6 @@ export class AllUsersComponent implements OnInit {
   }
 
   sort(data) {
-    console.log(data);
     data.sort((a: any, b: any) => {
       a = typeof(a[this.sortBy]) === 'string' ? a[this.sortBy].toUpperCase() : a[this.sortBy];
       b = typeof(b[this.sortBy]) === 'string' ? b[this.sortBy].toUpperCase() : b[this.sortBy];
@@ -112,52 +113,16 @@ export class AllUsersComponent implements OnInit {
     this.update();
   }
 
+
   ngOnInit() {
-  //   if(this._auth.getRole()==="User")
-  //   this._router.navigate(['/shorturl']);
-  // if(this._auth.getRole()===false)
-  //   this._router.navigate(['/']);
-  }
-  
-  addUser(){
-    this._router.navigate(['users/add-user']);
   }
 
-  getAllUserDetails(){
-    this._auth.getAllUsers()
-    .subscribe(
-      data => {
-        this.originalUsersData = data.results || [];
-        this.length = this.originalUsersData.length;
-        console.log(this.originalUsersData);
-        this.update();
-      },
-      error => {
-        console.log(error);
-        this.cantFetchAllUserDetails = true;
-      });
+  addProject(){
+    this._router.navigate(['/projects/add-project']);
   }
 
-  removeUser(uId){
-    this._auth.removeUser(uId)
-      .subscribe(
-        res => {
-          console.log(res);
-          this.ngOnInit();
-        },
-        err => {
-          console.log(err);
-          this.cantRemoveUser = true;
-        }
-      )
-  }
-
-  cantFetchAllUserDetailsAlert(){
-    this.cantFetchAllUserDetails=false;
-  }
-
-  cantRemoveUserAlert(){
-    this.cantRemoveUser=false;
+  viewProject(){
+    this._router.navigate(['/projects/view']);
   }
 
 

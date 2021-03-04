@@ -1,1 +1,56 @@
-<p>user-profile works!</p>
+
+<div class="media align-items-center py-3 mb-3">
+    <!-- <img [src]="'assets/img/avatars/' + userData.avatar" alt="" class="d-block ui-w-100 rounded-circle"> -->
+    <div class="media-body ml-4">
+      <h4 class="font-weight-bold mb-0">{{fName}} {{lName}}</h4>
+      <div class="text-muted mb-2">ID: {{uId}}</div>
+      <a routerLink="/users/profile/edit/{{uId}}" class="btn btn-primary btn-sm">Edit</a>&nbsp;
+      <!-- <a href="javascript:void(0)" class="btn btn-default btn-sm">Profile</a>&nbsp;
+     <a href="javascript:void(0)" class="btn btn-default btn-sm icon-btn"><i class="ion ion-md-mail"></i></a> -->
+    </div>
+  </div>
+  
+  <div class="card mb-4">
+    <div class="card-body">
+      <table class="table user-view-table m-0">
+        <tbody>
+          <tr>
+            <td>Registered:</td>
+            <td>{{registeredDate}}</td>
+          </tr>
+          <tr>
+            <td>Latest activity:</td>
+            <td>{{userData.latestActivity}}</td>
+          </tr>
+          <tr>
+            <td>Designation:</td>
+            <td>
+              <span *ngIf="userData.role === 1">User</span>
+              <span *ngIf="userData.role === 2">Author</span>
+              <span *ngIf="userData.role === 3">Staff</span>
+              <span *ngIf="userData.role === 4">Admin</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-body">
+  
+      <table class="table user-view-table m-0">
+        <tbody>
+          <tr>
+            <td>Name:</td>
+            <td>{{fName}} {{lName}}</td>
+          </tr>
+          <tr>
+            <td>E-mail:</td>
+            <td>{{email}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

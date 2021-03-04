@@ -21,7 +21,7 @@ export class ConfirmPageComponent implements OnInit {
   }
 
   submit(){
-    this._router.navigate(['/user-accounts']);
+    this._router.navigate(['/users']);
   }
 }
 

@@ -2,7 +2,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularMaterialModule } from './angular-material.module';
 
 // *******************************************************************************
@@ -36,6 +36,14 @@ import { EditProfileComponent } from './users/edit-profile/edit-profile.componen
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { UserActivitiesComponent } from './users/user-activities/user-activities.component';
 import { AuthService } from './_services/auth.services';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { ChartsModule } from 'ng2-charts';
+import { AllProjectsComponent } from './projects/all-projects/all-projects.component';
+import { AddProjectComponent } from './projects/add-project/add-project.component';
+import { ViewProjectComponent } from './projects/view-project/view-project.component';
+import { CustomDaterangePickerComponent } from './_helpers/custom-daterange-picker/custom-daterange-picker.component';
+import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
+import { PickersComponent } from './_helpers/pickers/pickers.component';
 
 
 // *******************************************************************************
@@ -56,8 +64,13 @@ import { AuthService } from './_services/auth.services';
     EditProfileComponent,
     ChangePasswordComponent,
     UserActivitiesComponent,
+    DashboardComponent,
+    AllProjectsComponent,
+    AddProjectComponent,
+    ViewProjectComponent,
+    CustomDaterangePickerComponent,
+    PickersComponent,
 
-   
   ],
 
   imports: [
@@ -74,12 +87,15 @@ import { AuthService } from './_services/auth.services';
     AngularMaterialModule,
     FlexLayoutModule,
     ClipboardModule,
+    ChartsModule,
   ],
 
   providers: [
     Title,
     AppService,
     AuthService,
+
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
 
   bootstrap: [AppComponent],

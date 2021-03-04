@@ -25,8 +25,8 @@ export class ChangePasswordComponent implements OnInit {
    }
 
   ngOnInit() {
-    // this.uId = this.activatedRoute.snapshot.paramMap.get('id'); //or params['id'] insted of paramMap.get('id')
-    // console.log(this.uId);
+    this.uId = this.activatedRoute.snapshot.paramMap.get('id'); //or params['id'] insted of paramMap.get('id')
+    console.log(this.uId);
   // if(this._auth.getRole()===false)
   //   this._router.navigate(['/']);
     this.passwordForm = this._formBuilder.group({

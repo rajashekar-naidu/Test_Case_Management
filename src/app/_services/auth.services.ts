@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
   //private baseUrl="http://localhost:5000";
-  private baseUrl="http://192.168.1.90:5000";
+  private baseUrl="http://192.168.1.139:8000";
   //user apiss
   private _registerUrl = this.baseUrl+"/user/register";//post
   private _loginUrl = this.baseUrl+"/user/login";//post
-  private _googleAuth = this.baseUrl+"/user/google"//get 
+ // private _googleAuth = this.baseUrl+"/user/google"//get 
   private _allUsers = this.baseUrl+"/user/all-user/list";//get
   private _userDetailsByID = this.baseUrl+"/user/user-by-id";//get  /:userId
   private _updateUserByID = this.baseUrl+"/user/user-update";//put  // /:userId
@@ -43,14 +43,14 @@ export class AuthService {
     return this.http.post<any>(this._loginUrl, user)
   }
 
-  googleOAth(){
-    return this.http.get<any>(this._googleAuth, {
-      headers: new HttpHeaders({
-           'Content-Type':  'application/json',
-         })
-      }
-      );
-  }
+  // googleOAth(){
+  //   return this.http.get<any>(this._googleAuth, {
+  //     headers: new HttpHeaders({
+  //          'Content-Type':  'application/json',
+  //        })
+  //     }
+  //     );
+  // }
 
   getDashboard(){
      return this.http.get<any>(this._dashboard)//, {

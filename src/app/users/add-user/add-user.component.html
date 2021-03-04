@@ -1,1 +1,100 @@
-<p>add-user works!</p>
+
+<div class="container py-3">
+    <div class="row">
+        <div class="mx-auto col-sm-6">
+            <!-- form user info -->
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="p-4 p-sm-5">
+
+                        <div *ngIf="emptyForm" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            The Form fields are <strong>Empty!!</strong> 
+                             <button type="button" (click)="closeEmptyFormAlert()" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                             </button>
+                        </div>
+
+                        <div *ngIf="serverError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            The Server is not <strong>Responding!!.</strong> Please try again after some time!!
+                             <button type="button" (click)="closeServerAlert()" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                             </button>
+                        </div>                      
+
+                        <div *ngIf="emailAlreadyRegistered" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                The email You have entered is already <strong>Registered!!</strong> 
+                            <button type="button" (click)="closeAlert()" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <h3 class="h3-login text-center text-muted font-weight-normal mb-4">Create Account</h3>
+                        <form class="form" [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+                                <div class="form-group" [ngClass]="{ 'has-error': addUserForm.get('fName').errors && (addUserForm.get('fName').touched || addUserForm.get('fName').dirty)}" >
+                                    <input type="text" formControlName="fName" class="form-control" placeholder="First Name" >
+                                    <span class="help-block" style="color: red; font-weight:200;" *ngIf="addUserForm.get('fName').errors && (addUserForm.get('fName').touched || addUserForm.get('fName').dirty)">
+                                        <span *ngIf="addUserForm.get('fName').errors.required">
+                                            *First Name is Required
+                                        </span> 
+                                    </span>		
+                                </div>
+
+                                <div class="form-group" [ngClass]="{ 'has-error': addUserForm.get('lName').errors && (addUserForm.get('lName').touched || addUserForm.get('lName').dirty)}" >
+                                    <input type="text" formControlName="lName" class="form-control" placeholder="Last Name">
+                                    <span class="help-block" style="color: red; font-weight:200;" *ngIf="addUserForm.get('lName').errors && (addUserForm.get('lName').touched || addUserForm.get('lName').dirty)">
+                                        <span *ngIf="addUserForm.get('lName').errors.required">
+                                            *Last Name is Required
+                                        </span> 
+                                    </span>		
+                                </div>
+
+                            <div class="form-group" [ngClass]="{ 'has-error': addUserForm.get('email').errors && (addUserForm.get('email').touched || addUserForm.get('email').dirty)}" >
+                                <input type="email" formControlName="email" class="form-control" placeholder="Email Address">
+                                <span class="help-block" style="color: red; font-weight:200;" *ngIf="addUserForm.get('email').errors && (addUserForm.get('email').touched || addUserForm.get('email').dirty)">
+                                    <span *ngIf="addUserForm.get('email').errors.required">
+                                        *Email is Required
+                                    </span> 
+                                    <span *ngIf="addUserForm.get('email').errors.email">
+                                        *please enter a valid email address
+                                    </span>
+                                </span>		
+                            </div>
+
+                            <div class="form-group" [ngClass]="{ 'has-error': addUserForm.get('password').errors && (addUserForm.get('password').touched || addUserForm.get('password').dirty)}">
+                                <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                                <span class="help-block" style="color: red; font-weight:200;" *ngIf="addUserForm.get('password').errors && (addUserForm.get('password').touched || addUserForm.get('password').dirty)">
+                                    <span *ngIf="addUserForm.get('password').errors.required">
+                                        *Password is Required
+                                    </span> 
+                                    <span *ngIf="addUserForm.get('password').errors.pattern">
+                                        *password should contain atleast 6 characters with one upper case letter
+                                    </span>
+                                </span>	
+                            </div>
+
+                            <div class="form-group" [ngClass]="{ 'has-error': addUserForm.get('role').errors && (addUserForm.get('role').touched || addUserForm.get('role').dirty)}">
+                                <select class="form-control" formControlName="role" id="role">
+                                    <option value="" disabled selected hidden>Select your Role</option>
+                                    <option *ngFor="let role of roles" [ngValue]="role" >{{ role}}</option>
+                                    <span class="help-block" style="color: red; font-weight:200;" *ngIf="addUserForm.get('role').errors && (addUserForm.get('role').touched || addUserForm.get('role').dirty)">
+                                        <span *ngIf="addUserForm.get('role').errors.required">
+                                            *Role is Required
+                                        </span> 
+                                    </span>		
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center m-0">
+                                <button type="submit" class="btn btn-primary" >Sign Up</button>
+                            </div>
+
+                        </form>
+                        <!-- / Form -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

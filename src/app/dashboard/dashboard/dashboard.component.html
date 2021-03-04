@@ -1,0 +1,107 @@
+<h4 class="display-4 my-2" style="font-size: x-large;">Test Cases</h4>
+
+<button class="btn"(click)="onClickYesterday()" [ngClass]="{'color' : isActiveYesterday, 'btn-secondary': !isActiveYesterday}">yesterday</button>
+<button class="btn" (click)="onClickToday()" [ngClass]="{'color' : isActiveToday, 'btn-secondary': !isActiveToday}">today</button>
+<button class="btn" (click)="onClickTomorrow()" [ngClass]="{'color' : isActiveTomorrow, 'btn-secondary': !isActiveTomorrow}">tomorrow</button>
+
+<table *ngIf="isActiveYesterday" class="table table-bordered table-hover">
+    <thead>
+      <tr class="color">
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>yesterday</td>
+        <td>yesterday</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+  <table *ngIf="isActiveToday" class="table table-bordered table-hover">
+    <thead>
+      <tr  class="color">
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>today</td>
+        <td>today</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <table *ngIf="isActiveTomorrow" class="table table-bordered table-hover">
+    <thead>
+      <tr  class="color">
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>tomorrow</td>
+        <td>tomorrow</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 class="display-4  my-2" style="font-size: x-large;">Recent Projects</h4>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr  class="color">
+        <th scope="col">#</th>
+        <th scope="col">Project Name</th>
+        <th scope="col">Project Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>tomorrow</td>
+        <td>tomorrow</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h4 class="display-4  my-2" style="font-size: x-large;">Project report</h4>
+  <div style="height: 250px">
+    <canvas baseChart height="250"
+      [datasets]="data5"
+      [labels]="['Success', 'Failure', 'Not Tested']"
+      [options]="options"
+      [chartType]="'pie'"
+      [colors]="colors5">
+    </canvas>
+  </div>

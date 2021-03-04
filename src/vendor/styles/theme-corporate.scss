@@ -20,7 +20,7 @@ body {
 
 // Navbar
 
-@include appwork-navbar-variant('.bg-navbar-theme', #fff, $color: $text-muted, $active-color: $body-color);
+@include appwork-navbar-variant('.bg-navbar-theme', #22a6b7, $color: rgba(255, 255, 255, 0.8), $active-color: #fff); //deafult:- $color: $text-muted, $active-color: $body-color
 
 .layout-navbar {
   box-shadow: 0 1px 0 $border-color;
@@ -28,7 +28,7 @@ body {
 
 // Sidenav
 
-@include appwork-sidenav-variant('.bg-sidenav-theme', #2e323a, $color: #838790);
+@include appwork-sidenav-variant('.bg-sidenav-theme', #24b0c2, $color: rgba(255, 255, 255, 0.8));
 
 // Footer
 

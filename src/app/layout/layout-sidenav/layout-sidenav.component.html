@@ -2,9 +2,11 @@
 
   <!-- Inner -->
   <div class="sidenav-inner" [ngClass]="{ 'py-1': orientation !== 'horizontal' }">
-
-    <sidenav-router-link icon="ion ion-ios-contact" route="/" [active]="isActive('/')">Home</sidenav-router-link>
-    <sidenav-router-link icon="ion ion-md-desktop" route="/page-2" [active]="isActive('/page-2')">Page 2</sidenav-router-link>
+    <sidenav-router-link icon="ion ion-md-desktop" route="/dashboard" [active]="isActive('/dashboard')">Dashboard</sidenav-router-link>
+ <!--   <sidenav-menu icon="ion ion-md-speedometer" text="Users" [active]="isMenuActive('/users')" [open]="isMenuOpen('/users')"> -->
+      <sidenav-router-link icon="ion ion-ios-contact" route="/users" [active]="isActive('/users')">Users</sidenav-router-link>
+  <!--  </sidenav-menu> -->
+      <sidenav-router-link icon="ion ion-ios-contact" route="/projects" [active]="isActive('/projects')">Projects</sidenav-router-link>
 
   </div>
 </sidenav>
