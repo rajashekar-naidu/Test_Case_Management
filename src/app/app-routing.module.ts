@@ -24,7 +24,14 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { AllProjectsComponent } from './projects/all-projects/all-projects.component';
 import { AddProjectComponent } from './projects/add-project/add-project.component';
 import { ViewProjectComponent } from './projects/view-project/view-project.component';
-import { PickersComponent } from './_helpers/pickers/pickers.component';
+import { TokenExpiredComponent } from './users/token-expired/token-expired.component';
+import { DesignationComponent } from './users/designation/designation.component';
+import { AddrunlogComponent } from './runlogs-testcases-reports/addrunlog/addrunlog.component';
+import { AddTestcaseComponent } from './runlogs-testcases-reports/add-testcase/add-testcase.component';
+import { AddReportComponent } from './runlogs-testcases-reports/add-report/add-report.component';
+import { ViewRunlogComponent } from './runlogs-testcases-reports/view-runlog/view-runlog.component';
+import { ViewTestcaseComponent } from './runlogs-testcases-reports/view-testcase/view-testcase.component';
+import { ViewReportComponent } from './runlogs-testcases-reports/view-report/view-report.component';
 
 
 // *******************************************************************************
@@ -33,8 +40,8 @@ import { PickersComponent } from './_helpers/pickers/pickers.component';
 const routes: Routes = [
   {path:'login', component:LoginComponent}, // canActivate:[AuthGuard]
   {path:'confirm-page', component:ConfirmPageComponent},
- // {path:'set-password', component:SetPasswordComponent},
-   {path:'datepicker', component:PickersComponent},
+  {path:'designation', component:DesignationComponent},
+ {path:'token-expired-page', component:TokenExpiredComponent},
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
@@ -76,6 +83,30 @@ const routes: Routes = [
 
   { path: 'projects/view', component: Layout1Component, children: [
     { path: '', component: ViewProjectComponent },
+  ]},
+
+  { path: 'projects/add-runlog', component: Layout1Component, children: [
+    { path: '', component: AddrunlogComponent },
+  ]},
+  
+  { path: 'projects/add-testcase', component: Layout1Component, children: [
+    { path: '', component: AddTestcaseComponent },
+  ]},
+
+  { path: 'projects/add-report', component: Layout1Component, children: [
+    { path: '', component: AddReportComponent },
+  ]},
+
+  { path: 'projects/view/view-runlog', component: Layout1Component, children: [
+    { path: '', component: ViewRunlogComponent },
+  ]},
+  
+  { path: 'projects/view/view-testcase', component: Layout1Component, children: [
+    { path: '', component: ViewTestcaseComponent },
+  ]},
+
+  { path: 'projects/view/view-report', component: Layout1Component, children: [
+    { path: '', component: ViewReportComponent },
   ]},
 
 

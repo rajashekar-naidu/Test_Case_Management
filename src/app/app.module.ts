@@ -8,11 +8,14 @@ import { AngularMaterialModule } from './angular-material.module';
 // *******************************************************************************
 // NgBootstrap
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClipboardModule } from 'ngx-clipboard'; 
 
+
+// Custom daterange picker
+import { CustomDaterangePickerComponent } from './_helpers/custom-daterange-picker/custom-daterange-picker.component';
 // *******************************************************************************
 // App
 
@@ -21,6 +24,8 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AppService } from './app.service';
 import { LayoutModule } from './layout/layout.module';
+import { SortablejsModule } from 'ngx-sortablejs';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 // *******************************************************************************
 // Pages
@@ -41,9 +46,18 @@ import { ChartsModule } from 'ng2-charts';
 import { AllProjectsComponent } from './projects/all-projects/all-projects.component';
 import { AddProjectComponent } from './projects/add-project/add-project.component';
 import { ViewProjectComponent } from './projects/view-project/view-project.component';
-import { CustomDaterangePickerComponent } from './_helpers/custom-daterange-picker/custom-daterange-picker.component';
 import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
-import { PickersComponent } from './_helpers/pickers/pickers.component';
+import { CustomDateAdapter } from './_helpers/customDateAdaptor';
+import { CustomDateParserFormatter } from './_helpers/customDateParserFormatter';
+import { TokenExpiredComponent } from './users/token-expired/token-expired.component';
+import { DesignationComponent } from './users/designation/designation.component';
+import { AddrunlogComponent } from './runlogs-testcases-reports/addrunlog/addrunlog.component';
+import { AddTestcaseComponent } from './runlogs-testcases-reports/add-testcase/add-testcase.component';
+import { AddReportComponent } from './runlogs-testcases-reports/add-report/add-report.component';
+import { ViewReportComponent } from './runlogs-testcases-reports/view-report/view-report.component';
+import { ViewTestcaseComponent } from './runlogs-testcases-reports/view-testcase/view-testcase.component';
+import { ViewRunlogComponent } from './runlogs-testcases-reports/view-runlog/view-runlog.component';
+
 
 
 // *******************************************************************************
@@ -53,6 +67,7 @@ import { PickersComponent } from './_helpers/pickers/pickers.component';
   declarations: [
     AppComponent,
     NotFoundComponent,
+    CustomDaterangePickerComponent,
 
     // Pages
     LoginComponent,
@@ -68,8 +83,14 @@ import { PickersComponent } from './_helpers/pickers/pickers.component';
     AllProjectsComponent,
     AddProjectComponent,
     ViewProjectComponent,
-    CustomDaterangePickerComponent,
-    PickersComponent,
+    TokenExpiredComponent,
+    DesignationComponent,
+    AddrunlogComponent,
+    AddTestcaseComponent,
+    AddReportComponent,
+    ViewReportComponent,
+    ViewTestcaseComponent,
+    ViewRunlogComponent,    
 
   ],
 
@@ -88,13 +109,17 @@ import { PickersComponent } from './_helpers/pickers/pickers.component';
     FlexLayoutModule,
     ClipboardModule,
     ChartsModule,
+    SortablejsModule,
+    NgxPaginationModule,
   ],
 
   providers: [
     Title,
     AppService,
     AuthService,
-
+    
+    {provide: NgbDateAdapter, useClass: CustomDateAdapter, multi: true},
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
 

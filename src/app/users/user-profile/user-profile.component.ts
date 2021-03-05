@@ -28,7 +28,8 @@ export class UserProfileComponent implements OnInit {
     //   this._router.navigate(['/']);
     this.uId = this.activatedRoute.snapshot.paramMap.get('id'); //or params['id'] insted of paramMap.get('id')
     console.log(this.uId);
-      this.getUserDetailsBasedOnId(this.uId); 
+      this.getUserDetailsById(this.uId); 
+      this.getRoleDetailsByID(this.uId);
   }
 
   userData = {
@@ -40,7 +41,7 @@ export class UserProfileComponent implements OnInit {
     return numeral(v).format('0,0');
   }
 
-  getUserDetailsBasedOnId(uId){  
+  getUserDetailsById(uId){  
     this._auth.getUserDetails(uId)
     .subscribe(
       data => {
@@ -56,9 +57,15 @@ export class UserProfileComponent implements OnInit {
       });
   }
 
-  failedToGetDetailsAlert(){
-    this.failedToGetDetails = false;
+  getRoleDetailsByID(uId){
+    this._auth.getRoleByID(uId)
+    .subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
   }
-
 
 }

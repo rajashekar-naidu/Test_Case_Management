@@ -1,13 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbCalendar, NgbDate, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from 'src/app/app.service';
+import { CustomDateAdapter } from 'src/app/_helpers/customDateAdaptor';
+import { CustomDateParserFormatter } from 'src/app/_helpers/customDateParserFormatter';
 import { AuthService } from 'src/app/_services/auth.services';
 
 @Component({
   selector: 'app-all-projects',
   templateUrl: './all-projects.component.html',
-  styleUrls: ['./all-projects.component.scss']
+  styleUrls: ['./all-projects.component.scss'],
+  providers: [{provide: NgbDateAdapter, useClass: CustomDateAdapter},
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}]
 })
 export class AllProjectsComponent implements OnInit {
   isRTL: boolean;
@@ -16,8 +21,16 @@ export class AllProjectsComponent implements OnInit {
   cantRemoveUser:boolean;
   length;
 
+  hoveredDate: NgbDate | null = null;
+  singleSelectValue: any;
+  fromDate: NgbDate | null;
+  toDate: NgbDate | null;
 
-  constructor(private http: HttpClient, private _appService:AppService, private _router:Router, private _auth:AuthService) { 
+  constructor(private http: HttpClient, private _appService:AppService, 
+    private _router:Router, private _auth:AuthService,
+    private calendar: NgbCalendar, 
+    public formatter: NgbDateParserFormatter
+    ) { 
     this._appService.pageTitle = 'Projects';
     this.isRTL = _appService.isRTL;
     this.loadData();
@@ -28,8 +41,9 @@ export class AllProjectsComponent implements OnInit {
  // filterVerified = 'Any';
  //filterRole = 'Any';
  // filterStatus = 'Any';
- filterStartDate = [null, null];
- filterDeadLine = [null, null];
+ filterStartDate = 'Any';
+ filterEndDate = 'Any';
+
 
 
   // Table
@@ -47,6 +61,38 @@ export class AllProjectsComponent implements OnInit {
 
   usersData: object[] = [];
   originalUsersData: object[] = [];
+
+  
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
+  }
+
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
+
+
+
 
   loadData() {
     this.http.get(this.dataUrl)
@@ -112,7 +158,6 @@ export class AllProjectsComponent implements OnInit {
     this.currentPage = 1;
     this.update();
   }
-
 
   ngOnInit() {
   }

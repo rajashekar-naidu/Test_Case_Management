@@ -39,7 +39,6 @@ export class AddUserComponent implements OnInit {
   onSubmit() {    
     if (this.addUserForm.invalid) {
       this.emptyForm=true;
-    //  this.ngOnInit();
       return;
     }
     console.log(this.addUserForm.value);
@@ -47,18 +46,21 @@ export class AddUserComponent implements OnInit {
     .subscribe(
         res => {
           console.log(res);
-          this._router.navigate(['/confirm-page']);
+          if(res.status === 'success') {
+            sessionStorage.setItem('regID',res.data.userId);
+            this._router.navigate(['/confirm-page']);
+          }
         },
         err => {
           console.log(err.error.errors.email);
           if(err.error.errors.email === "that email is already registered")
             this.emailAlreadyRegistered=true;
 
-          // if(err.name === "HttpErrorResponse")
-          //   this.serverError=true;
+            // if(err)
+            //     this.serverError=true;
 
         })
-    this.addUserForm.reset();
+   // this.addUserForm.reset();
  }
 
 closeEmptyFormAlert(){

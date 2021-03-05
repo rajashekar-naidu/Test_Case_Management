@@ -13,14 +13,48 @@
             <option *ngFor="let item of ['Any', 'User', 'Author', 'Staff', 'Admin']" [value]="item">{{item}}</option>
           </select>
         </div> -->
+        
+        <div class="col-md-10 row">
+          <div>
+            <input name="datepicker"
+                  type="hidden"
+                   class="form-control"
+                   ngbDatepicker
+                   #datepicker="ngbDatepicker"
+                   (dateSelect)="onDateSelection($event)"
+                   [displayMonths]="2"
+                   [dayTemplate]="t"
+                   outsideDays="hidden"
+                   [startDate]="fromDate!"
+                   tabindex="-1">
+            <ng-template #t let-date let-focused="focused">
+              <span class="custom-day"
+                    [class.focused]="focused"
+                    [class.range]="isRange(date)"
+                    [class.faded]="isHovered(date) || isInside(date)"
+                    (mouseenter)="hoveredDate = date"
+                    (mouseleave)="hoveredDate = null">
+                {{ date.day }}
+              </span>
+            </ng-template>
+          </div>
         <div class="col-md mb-4">
           <label class="form-label">Start Date</label>
-          <custom-daterange-picker [(ngModel)]="filterStartDate"></custom-daterange-picker>
+            <input #dpFromDate (click)="datepicker.toggle()"
+                   class="custom-select" name="dpFromDate"
+                   [value]="formatter.format(fromDate)"
+                   (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
         </div>
         <div class="col-md mb-4">
-            <label class="form-label">Dead Line</label>
-            <custom-daterange-picker [(ngModel)]="filterDeadLine"></custom-daterange-picker>
+          <label class="form-label">End Date</label>
+            <input #dpToDate (click)="datepicker.toggle()"
+                   class="custom-select" name="dpToDate"
+                   [value]="formatter.format(toDate)"
+                   (input)="toDate = validateInput(toDate, dpToDate.value)">
         </div>
+      </div>
+  
+        
         <div class="col-md col-xl-2 mb-4">
           <label class="form-label d-none d-md-block">&nbsp;</label>
           <button type="button" class="btn btn-secondary btn-block">Show</button>
@@ -115,16 +149,16 @@
                 <span class="badge badge-outline-default" *ngIf="user.status === 3">Deleted</span>
               </td>
               <td class="text-center text-nowrap align-middle">
-                <a href="javascript:void(0)" class="btn btn-default btn-xs icon-btn md-btn-flat" ngbTooltip="Edit">
+                <!-- <a href="javascript:void(0)" class="btn btn-default btn-xs icon-btn md-btn-flat" ngbTooltip="Edit">
                   <i class="ion ion-md-create"></i>
-                </a>
+                </a> -->
                 <div class="btn-group" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
                   <button type="button" class="btn btn-default btn-xs icon-btn md-btn-flat hide-arrow" ngbDropdownToggle ngbTooltip="Actions">
                     <i class="ion ion-ios-settings"></i>
                   </button>
                   <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
-                    <a class="dropdown-item" href="javascript:void(0)">View profile</a>
-                    <a class="dropdown-item" href="javascript:void(0)">Ban user</a>
+                    <a class="dropdown-item" routerLink="/projects/view">View Project</a>
+                    <!-- <a class="dropdown-item" href="javascript:void(0)">Ban user</a> -->
                     <a class="dropdown-item" href="javascript:void(0)">Remove</a>
                   </div>
                 </div>

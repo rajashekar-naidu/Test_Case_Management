@@ -65,22 +65,4 @@ export class UserActivitiesComponent implements OnInit {
     });
   }
 
-    // getAllUrlDetails(){
-    //   this._auth.getAllUrls()
-    //   .subscribe(
-    //     data => {        
-    //       this.urls = data.results || [];
-    //       this.urlsById = data.results.filter(e => e.user_id === this.uId);
-    //       console.log(this.urlsById);
-    //     },
-    //     error => {
-    //       console.log(error);
-    //       this.failedToGetDetails = true;
-    //     });
-    // }
-
-  failedToGetDetailsAlert(){
-    this.failedToGetDetails = false;
-  }
-
 }

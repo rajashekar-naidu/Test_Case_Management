@@ -1,0 +1,118 @@
+
+
+
+<div class="card mb-4">
+
+    <div *ngIf="emptyForm" class="alert alert-danger alert-dismissible fade show" role="alert">
+        The Form fields are <strong>Empty!!</strong> 
+         <button type="button" (click)="closeEmptyFormAlert()" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+    </div>
+
+    <div *ngIf="successful" class="alert alert-success alert-dismissible fade show" role="alert">
+        Report has been added <strong>Successfully!!</strong> 
+         <button type="button" (click)="closeSuccessfulAlert()" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+
+    <h6 class="card-header">
+      Add Report
+    </h6>
+    <div class="card-body">
+      <form class="form" [formGroup]="addReportForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">Project Name</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="project_name" class="form-control" placeholder="Name of the Project">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">StoreKing ID</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="tester_id" class="form-control" placeholder=" Your Storeking ID">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">Expected Result</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="expected_result" class="form-control" placeholder="Expected Result">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">Actual Result</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="actual_result" class="form-control" placeholder="Actual Result">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">Test Cases Passed</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="no_of_testCase_passed" class="form-control" placeholder="Number of Test Cases Passed">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">Test Cases Failed</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="no_of_testCase_failed" class="form-control" placeholder="Number of Test Cases Failed">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">Bug ID</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="bug_id" class="form-control" placeholder="Bug ID">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">Jira Link</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="jira_link" class="form-control" placeholder="Jira Link">
+            </div>
+        </div>
+
+        <div class="form-group row" [ngClass]="{ 'has-error': addReportForm.get('bug_id_status').errors && (addReportForm.get('bug_id_status').touched || addReportForm.get('bug_id_status').dirty)}">
+            <label class="col-form-label col-sm-2 text-sm-right">Bug ID Status</label>
+            <div class="col-sm-10">
+                <select class="form-control" formControlName="bug_id_status" id="bug_id_status">
+                    <option value="" disabled selected hidden>status here</option>
+                    <option *ngFor="let status of statuses" [ngValue]="status" >{{ status}}</option>
+                    <span class="help-block" style="color: red; font-weight:200;" *ngIf="addReportForm.get('bug_id_status').errors && (addReportForm.get('bug_id_status').touched || addReportForm.get('bug_id_status').dirty)">
+                        <span *ngIf="addReportForm.get('bug_id_status').errors.required">
+                            *Status is Required
+                        </span> 
+                    </span>		
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">Comments</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" formControlName="comments" placeholder="Your Comments on report"></textarea>
+            </div>
+        </div>
+
+        <!-- <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-sm-right">Attachment</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control" formControlName="attachment" placeholder="Attachment">
+            </div>
+        </div> -->
+
+         <div class="form-group row">
+          <div class="col-sm-10 ml-sm-auto">
+            <button type="submit"  class="btn btn-primary">Add</button> <!--(click)="onSubmit()"-->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+

@@ -6,9 +6,14 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
+
+  //Base URL
   //private baseUrl="http://localhost:5000";
-  private baseUrl="http://192.168.1.139:8000";
-  //user apiss
+  private baseUrl="http://192.168.1.139:9000";
+
+
+
+  //user APIs
   private _registerUrl = this.baseUrl+"/user/register";//post
   private _loginUrl = this.baseUrl+"/user/login";//post
  // private _googleAuth = this.baseUrl+"/user/google"//get 
@@ -22,22 +27,25 @@ export class AuthService {
   private _changePassword = this.baseUrl+"/user/update-password"; //post
   private _dashboard = this.baseUrl+"/user/dashboard"; //get
 
+
+
+  //Role APIs
+  private _setRole = this.baseUrl+"/role/role-info"//post
+  private _getRoles = this.baseUrl+"/role/get-role-info"//get
+  private _getRoleByID = this.baseUrl+"/role/get-role-info-id"//get //:userId
+
   
-  
-  //url apis
-  private _sendLongUrl = this.baseUrl+"/shortUrl/url";//post
-  private _allUrls = this.baseUrl+"/shortUrl/all-url";//get
- // private _urlByID = this.baseUrl+"/shortUrl/modify";//put 
-  private _removeUrl = this.baseUrl+"/shortUrl/remove-url";//delete //UrlID
-  private _urldetails = this.baseUrl+"/shortUrl/get-url";//get //urlID
-  private _redirectToUrl = this.baseUrl+"/shortUrl/redirect-url/:code";//get
 
 
   constructor(private http: HttpClient, private _router: Router) { }
 
+
+/////////////////////user APIs ///////////////////////////
+
   registerUser(user) {
     return this.http.post<any>(this._registerUrl, user)
   }
+
   loginUser(user) {
     console.log(user);
     return this.http.post<any>(this._loginUrl, user)
@@ -53,77 +61,37 @@ export class AuthService {
   // }
 
   getDashboard(){
-     return this.http.get<any>(this._dashboard)//, {
-    //   headers: new HttpHeaders({
-    //     'Content-type': 'application/json',
-    //     'authorization': localStorage.getItem('token')
-    //   })
-    // });
+     return this.http.get<any>(this._dashboard)
   }
 
   getAllUsers() {
-     return this.http.get<any>(this._allUsers)//, {
-    //   headers: new HttpHeaders({
-    //     'Content-type': 'application/json',
-    //     'authorization': localStorage.getItem('token')
-    //   })
-    // });
+     return this.http.get<any>(this._allUsers)
   }
 
   getUserDetails(uId){
     console.log(uId);
-    return this.http.get<any>(`${this._userDetailsByID}/${uId}`)/*,{
-      headers:new HttpHeaders({
-        'Content-type':'application/json',
-        'authorization':localStorage.getItem('token')
-      })      
-    });*/
+    return this.http.get<any>(`${this._userDetailsByID}/${uId}`)
   }
   
-  updateUser(uId,user) { //check if its working properly
-    return this.http.put<any>(`${this._updateUserByID}/${uId}`, user) /*, {
-      headers:new HttpHeaders({
-        'Content-type':'application/json',
-        'authorization':localStorage.getItem('token')
-      })
-    });*/
+  updateUser(uId,user) {
+    return this.http.put<any>(`${this._updateUserByID}/${uId}`, user) 
   }
 
 
   removeUser(uId){
-    return this.http.delete(`${this._removeUserByID}/${uId}`)/*,{
-      headers:new HttpHeaders({
-        'Content-type':'application/json',
-        'authorization':localStorage.getItem('token')
-      })      
-    });*/
+    return this.http.delete(`${this._removeUserByID}/${uId}`)
   }
 
   changePassword(password) {
-    return this.http.post<any>(this._changePassword, password) /*, {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json',
-        'authorization': localStorage.getItem('token')
-      })
-    });*/
+    return this.http.post<any>(this._changePassword, password) 
   }
 
   logoutUser(){  
-    return this.http.get<any>(this._logoutByID) /*, {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json',
-        'authorization': localStorage.getItem('token')
-      })
-    }); */
+    return this.http.get<any>(this._logoutByID) 
   }
 
   userLogsByID(uId){
-    return this.http.get<any>(`${this._getLogsByID}/${uId}`) /*,{
-      headers: new HttpHeaders({
-        'Content-type': 'application/json',
-        'authorization': localStorage.getItem('token')
-      })
-    });*/
+    return this.http.get<any>(`${this._getLogsByID}/${uId}`) 
   }
 
   isAuthenticated(){
@@ -138,7 +106,11 @@ export class AuthService {
     return localStorage.getItem('uId');
   }
 
-  getRole(){ //check if this is needed
+
+
+  /////////////////////role and Designation APIs ///////////////////////////
+
+  getRole(){ 
     if(localStorage.getItem('role') === "Admin")
       return "Admin";
     if(localStorage.getItem('role') === "User")
@@ -147,54 +119,16 @@ export class AuthService {
     return false;
   }
 
-  sendLongUrl(longUrl){    
-    return this.http.post<any>(this._sendLongUrl,longUrl) /*, {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json',
-        'authorization': localStorage.getItem('token')
-      })
-    });*/
+  assignRole(role) {
+    return this.http.post<any>(this._setRole, role)
   }
 
+  getAllRoles() {
+    return this.http.get<any>(this._getRoles)
+ }
 
-  getAllUrls(){
-    return this.http.get<any>(this._allUrls) /*, {
-      headers:new HttpHeaders({
-        'Content-type':'application/json',
-        'authorization':localStorage.getItem('token')
-      })
-    });*/
-  }
-
-  // modifyUrlDetails(urlId,longUrl){ //not needed
-  //   console.log(urlId);
-  //   console.log(longUrl);
-  //   return this.http.put<any>(`${this._urlByID}/${urlId}`, longUrl, {
-  //     headers:new HttpHeaders({
-  //       'Content-type':'application/json',
-  //       'authorization':localStorage.getItem('token')
-  //     })
-  //   });
-  // }
-
-  getUrlDetails(urlId){
-    console.log(urlId);
-    
-    return this.http.get<any>(`${this._urldetails}/${urlId}`) /*, {
-      headers:new HttpHeaders({
-        'Content-type':'application/json',
-        'authorization':localStorage.getItem('token')
-      })
-    }); */
-  }
-
-  removeUrl(urlId){
-    return this.http.delete(`${this._removeUrl}/${urlId}`) /*,{
-      headers:new HttpHeaders({
-        'Content-type':'application/json',
-        'authorization':localStorage.getItem('token')
-      })      
-    });*/
-  }
-
+ getRoleByID(uid){
+   console.log(uid);
+  return this.http.get<any>(`${this._getRoleByID}/${uid}`)
+ }
 }

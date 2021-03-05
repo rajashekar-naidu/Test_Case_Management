@@ -29,7 +29,7 @@
                             </button>
                         </div>
 
-                        <h3 class="h3-login text-center text-muted font-weight-normal mb-4">Create Account</h3>
+                        <h3 class="h3-login text-center text-muted font-weight-normal mb-4">Add User</h3>
                         <form class="form" [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
                                 <div class="form-group" [ngClass]="{ 'has-error': addUserForm.get('fName').errors && (addUserForm.get('fName').touched || addUserForm.get('fName').dirty)}" >
                                     <input type="text" formControlName="fName" class="form-control" placeholder="First Name" >
@@ -86,7 +86,7 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center m-0">
-                                <button type="submit" class="btn btn-primary" >Sign Up</button>
+                                <button type="submit" class="btn btn-primary" >Add</button>
                             </div>
 
                         </form>

@@ -92,10 +92,6 @@ export class EditProfileComponent implements OnInit {
           }
     )};
   
-    failedToGetDetailsAlert(){
-      this.failedToGetDetails = false;
-    }
-  
     editSuccessFulAlert(){
       this.editSuccessFul = false;
     }

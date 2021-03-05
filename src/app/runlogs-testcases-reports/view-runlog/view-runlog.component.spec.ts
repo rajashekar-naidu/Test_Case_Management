@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewProjectComponent } from './view-project.component';
+import { ViewRunlogComponent } from './view-runlog.component';
 
-describe('ViewProjectComponent', () => {
-  let component: ViewProjectComponent;
-  let fixture: ComponentFixture<ViewProjectComponent>;
+describe('ViewRunlogComponent', () => {
+  let component: ViewRunlogComponent;
+  let fixture: ComponentFixture<ViewRunlogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewProjectComponent ]
+      declarations: [ ViewRunlogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewProjectComponent);
+    fixture = TestBed.createComponent(ViewRunlogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
