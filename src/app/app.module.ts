@@ -57,6 +57,16 @@ import { AddReportComponent } from './runlogs-testcases-reports/add-report/add-r
 import { ViewReportComponent } from './runlogs-testcases-reports/view-report/view-report.component';
 import { ViewTestcaseComponent } from './runlogs-testcases-reports/view-testcase/view-testcase.component';
 import { ViewRunlogComponent } from './runlogs-testcases-reports/view-runlog/view-runlog.component';
+import { AddFeatureComponent } from './features/add-feature/add-feature.component';
+import { AllFeaturesComponent } from './features/all-features/all-features.component';
+import { UpdateFeatureComponent } from './features/update-feature/update-feature.component';
+import { UpdateRoleComponent } from './role/update-role/update-role.component';
+import { AddRoleComponent } from './role/add-role/add-role.component';
+import { AllRolesComponent } from './role/all-roles/all-roles.component';
+import { ViewFeatureComponent } from './features/view-feature/view-feature.component';
+import { ViewRoleComponent } from './role/view-role/view-role.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
+
 
 
 
@@ -90,7 +100,17 @@ import { ViewRunlogComponent } from './runlogs-testcases-reports/view-runlog/vie
     AddReportComponent,
     ViewReportComponent,
     ViewTestcaseComponent,
-    ViewRunlogComponent,    
+    ViewRunlogComponent,
+    AddFeatureComponent,
+    AllFeaturesComponent,
+    UpdateFeatureComponent,
+    UpdateRoleComponent,
+    AddRoleComponent,
+    AllRolesComponent,
+    ViewFeatureComponent,
+    ViewRoleComponent,
+    ServerErrorComponent,
+
 
   ],
 

@@ -1,19 +1,16 @@
 
 <div class="row">
-<div class="media align-items-center row col-sm-3 mb-4">
+<div class="media align-items-center row col-md-3 mb-4">
+    <h3 class="display-4">Profile:</h3>
     <img [src]="'assets/img/avatars/4.png'" alt="" class="d-block ui-w-180 rounded">
 </div>
-<div class="col-sm-9">
+<div class="col-md-9">
 <div class="media-body text-right mb-2">
-  <!-- <h4 class="font-weight-bold mb-0">{{fName}} {{lName}}</h4>
-  <div class="text-muted mb-2">ID: {{uId}}</div> -->
   <a routerLink="/users/profile/edit/{{uId}}" class="btn btn-danger btn-md">Block</a>&nbsp;
   <a routerLink="/users/profile/edit/{{uId}}" class="btn btn-primary btn-md">Edit</a>&nbsp;
-  <!-- <a href="javascript:void(0)" class="btn btn-default btn-sm">Profile</a>&nbsp;
- <a href="javascript:void(0)" class="btn btn-default btn-sm icon-btn"><i class="ion ion-md-mail"></i></a> -->
 </div>
 
-<div class="card col-sm-12 mb-4">
+<div class="card col-md-12 mb-4">
   <div class="card-body">
 
     <table class="table user-view-table m-0">

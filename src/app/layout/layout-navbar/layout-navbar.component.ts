@@ -15,7 +15,7 @@ export class LayoutNavbarComponent implements OnInit{
   fName:string ;
  lName:string ;
  uId = this._auth.getuId();
- serverError:boolean;
+//  serverError:boolean;
  result:any;
 
   @Input() sidenavToggle = true;
@@ -40,7 +40,8 @@ export class LayoutNavbarComponent implements OnInit{
       error => {
         console.log(error);
         if(error.name === "HttpErrorResponse")
-        this.serverError=true;
+          this._router.navigate(['/server-error']);
+        // this.serverError=true;
       });
   }
 
@@ -67,8 +68,8 @@ export class LayoutNavbarComponent implements OnInit{
     this._router.navigate(['/login']);
   }
 
-  closeServerAlert(){
-    this.serverError=false;
-  }
+  // closeServerAlert(){
+  //   this.serverError=false;
+  // }
 
 }

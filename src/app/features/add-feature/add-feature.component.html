@@ -1,0 +1,57 @@
+
+
+    <div class="col d-flex justify-content-center justify-content-center align-items-center">
+  
+        <!-- Form -->
+        <div class="card col-sm-8" style="margin-top: 50px;">
+          
+      <div *ngIf="emptyForm" class="alert alert-danger alert-dismissible fade show" role="alert">
+        The Form fields are <strong>Empty!!</strong> 
+         <button type="button" (click)="closeEmptyFormAlert()" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+    </div>
+
+    <div *ngIf="sucessful" class="alert alert-success alert-dismissible fade show" role="alert">
+        Feature has been <strong>Successfully</strong> assigned!!
+         <button type="button" (click)="sucessfulChangeAlert()" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+    </div>                      
+            <h4 class="card-header display-4" style="font-size: larger;">
+                Add Feature
+            </h4>
+          <div class="p-sm-4">
+            <form class="form" [formGroup]="addFeature" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label class="col-form-label col-sm-12 text-sm-left">Feature Name</label>
+                    <div class="col-sm-12">
+                      <input type="text" formControlName="featureName" class="form-control" placeholder="Feature Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label col-sm-12 text-sm-left">Module Name</label>
+                    <div class="col-sm-12">
+                      <input type="text" formControlName="moduleName" class="form-control" placeholder="Module">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-form-label col-sm-12 text-sm-left">Created By</label>
+                    <div class="col-sm-12">
+                      <input type="text" formControlName="createdBy" class="form-control" placeholder="Your Name">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary btn-block" (click)="submit()">Assign Feature</button>
+                </div>
+            </form>
+       
+          </div>
+        </div>
+        <!-- / Form -->
+    
+      </div>
+  
+

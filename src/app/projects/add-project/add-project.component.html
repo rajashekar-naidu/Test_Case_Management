@@ -34,11 +34,6 @@
             <select class="form-control" formControlName="id" id="name">
                 <option value="" disabled selected hidden>Select Name</option>
                 <option *ngFor="let originalUserData of originalUsersData" [ngValue]="originalUserData._id" >{{ originalUserData.fName}} {{ originalUserData.lName}}</option>
-                <!-- <span class="help-block" style="color: red; font-weight:200;" *ngIf="addUserForm.get('role').errors && (addUserForm.get('role').touched || addUserForm.get('role').dirty)">
-                    <span *ngIf="addUserForm.get('role').errors.required">
-                        *Role is Required
-                    </span> 
-                </span>		 -->
             </select>
             </div>
         </div>

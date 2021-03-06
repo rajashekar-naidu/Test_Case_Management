@@ -1,0 +1,59 @@
+
+
+    <div class="col d-flex justify-content-center justify-content-center align-items-center">
+  
+        <!-- Form -->
+        <div class="card col-sm-8" style="margin-top: 50px;">
+          
+      <div *ngIf="emptyForm" class="alert alert-danger alert-dismissible fade show" role="alert">
+        The Form fields are <strong>Empty!!</strong> 
+         <button type="button" (click)="closeEmptyFormAlert()" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+    </div>
+
+    <div *ngIf="sucessful" class="alert alert-success alert-dismissible fade show" role="alert">
+        Role has been <strong>Successfully</strong> added!!
+         <button type="button" (click)="sucessfulChangeAlert()" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+    </div>                      
+            <h4 class="card-header display-4" style="font-size: larger;">
+                Add Role
+            </h4>
+          <div class="p-sm-4">
+            <form class="form" [formGroup]="addRole" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label class="col-form-label col-sm-12 text-sm-left">Role Name</label>
+                    <div class="col-sm-12">
+                      <input type="text" formControlName="roleName" class="form-control" placeholder="Role Name">
+                    </div>
+                </div>
+
+                <div class="form-group"> <!-- [ngClass]="{ 'has-error': addUserForm.get('priority').errors && (addUserForm.get('priority').touched || addUserForm.get('priority').dirty)}" -->
+                  <label class="col-form-label col-sm-12 text-sm-left">Feature</label>
+                  <div cclass="col-sm-12">
+                  <select class="form-control" formControlName="feature" id="feature">
+                      <option value="" disabled selected hidden>Select Feature</option>
+                      <option *ngFor="let originalFeatureData of originalFeaturesData" [ngValue]="originalFeatureData.featureCode" >{{originalFeatureData.featureName}}</option>
+                  </select>
+                  </div>
+              </div>
+
+                <div class="form-group">
+                    <label class="col-form-label col-sm-12 text-sm-left">Created By</label>
+                    <div class="col-sm-12">
+                      <input type="text" formControlName="createdBy" class="form-control" placeholder="Your Name">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary btn-block" (click)="submit()">Assign Role</button>
+                </div>
+            </form>
+       
+          </div>
+        </div>
+        <!-- / Form -->
+    
+      </div>
+  

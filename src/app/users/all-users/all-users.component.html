@@ -9,7 +9,7 @@
         <div class="col-md mb-4">
           <label class="form-label">Role</label>
           <select class="custom-select" [(ngModel)]="filterRole">
-            <option *ngFor="let item of ['Any', 'User', 'Author', 'Staff', 'Admin']" [value]="item">{{item}}</option>
+            <option *ngFor="let item of ['User','Admin']" [value]="item">{{item}}</option>
           </select>
         </div>
         <div class="col-md mb-4">
@@ -67,7 +67,7 @@
         </div> -->
         <div class="col-md col-xl-2 mb-4">
           <label class="form-label d-none d-md-block">&nbsp;</label>
-          <button type="button" class="btn btn-secondary btn-block">Show</button>
+          <button type="button" (click)="update()" class="btn btn-secondary btn-block">Show</button>
         </div>
       </div>
     </div>
@@ -150,11 +150,11 @@
                 <span class="ion" [ngClass]="{'ion-md-checkmark text-primary': user.verified, 'ion-md-close text-light': !user.verified}"></span>
               </td> -->
               <td class="align-middle">
-                <span *ngIf="user.role === 1">User</span>
+                <!-- <span *ngIf="user.role === 1">User</span>
                 <span *ngIf="user.role === 2">Author</span>
                 <span *ngIf="user.role === 3">Staff</span>
-                <span *ngIf="user.role === 4">Admin</span>
-                <!-- {{roles[i].designation}} -->
+                <span *ngIf="user.role === 4">Admin</span> -->
+                {{user.role}}
               </td>
               <td class="align-middle">
                 <span class="badge badge-outline-success" *ngIf="user.status === 1">Active</span>

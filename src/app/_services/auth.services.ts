@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   //Base URL
-  //private baseUrl="http://localhost:5000";
   private baseUrl="http://192.168.1.139:9000";
 
 
@@ -32,7 +31,16 @@ export class AuthService {
   //Role APIs
   private _setRole = this.baseUrl+"/role/role-info"//post
   private _getRoles = this.baseUrl+"/role/get-role-info"//get
-  private _getRoleByID = this.baseUrl+"/role/get-role-info-id"//get //:userId
+  private _getRoleByID = this.baseUrl+"/role/get-role-info-id"//get //:roleId
+  private _updateRoleByID = this.baseUrl+"/role/update-role-info" //:roleId //put
+  private _deleteRoleByID = this.baseUrl+"/role/delete-role-info" //:roleId //delete
+
+  //Features APIs
+  private _setFeature = this.baseUrl+"/feature/adding-feature" //post
+  private _getFeatures = this.baseUrl+"/feature/get-feature"//get
+  private _getFeatureById = this.baseUrl+"/feature/get-feature-by-id"//featureid //get
+  private _updateFeatureById = this.baseUrl+"/feature/update-feature" //featureid //put
+  private _deleteFeatureById = this.baseUrl+"/feature/delete-feature" //featureid //delete
 
   
 
@@ -108,7 +116,7 @@ export class AuthService {
 
 
 
-  /////////////////////role and Designation APIs ///////////////////////////
+  /////////////////////Role APIs ///////////////////////////
 
   getRole(){ 
     if(localStorage.getItem('role') === "Admin")
@@ -127,8 +135,41 @@ export class AuthService {
     return this.http.get<any>(this._getRoles)
  }
 
- getRoleByID(uid){
-   console.log(uid);
-  return this.http.get<any>(`${this._getRoleByID}/${uid}`)
+ getRoleByID(rId){
+   console.log(rId);
+  return this.http.get<any>(`${this._getRoleByID}/${rId}`)
  }
+
+ updateRole(rId,role) {
+  return this.http.put<any>(`${this._updateRoleByID}/${rId}`, role) 
+}
+
+removeRole(rId){
+  return this.http.delete(`${this._deleteRoleByID}/${rId}`)
+}
+
+
+ /////////////////////Feature APIs ///////////////////////////
+
+ assignFeature(feature) {
+  return this.http.post<any>(this._setFeature, feature)
+}
+
+getAllFeatures() {
+  return this.http.get<any>(this._getFeatures)
+}
+
+getFeatureByID(fId){
+ console.log(fId);
+return this.http.get<any>(`${this._getFeatureById}/${fId}`)
+}
+
+updateFeature(fId,feature) {
+return this.http.put<any>(`${this._updateFeatureById}/${fId}`, feature) 
+}
+
+removeFeature(fId){
+return this.http.delete(`${this._deleteFeatureById}/${fId}`)
+}
+
 }

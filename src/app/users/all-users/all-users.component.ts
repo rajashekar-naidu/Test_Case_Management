@@ -102,7 +102,9 @@ export class AllUsersComponent implements OnInit {
 
     this.sort(data);
     this.usersData = this.paginate(data);
+
   }
+
 
   filter(data) {
     const filter = this.filterVal.toLowerCase();

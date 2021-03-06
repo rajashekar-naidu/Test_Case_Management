@@ -32,6 +32,15 @@ import { AddReportComponent } from './runlogs-testcases-reports/add-report/add-r
 import { ViewRunlogComponent } from './runlogs-testcases-reports/view-runlog/view-runlog.component';
 import { ViewTestcaseComponent } from './runlogs-testcases-reports/view-testcase/view-testcase.component';
 import { ViewReportComponent } from './runlogs-testcases-reports/view-report/view-report.component';
+import { AllFeaturesComponent } from './features/all-features/all-features.component';
+import { AllRolesComponent } from './role/all-roles/all-roles.component';
+import { AddFeatureComponent } from './features/add-feature/add-feature.component';
+import { UpdateFeatureComponent } from './features/update-feature/update-feature.component';
+import { ViewFeatureComponent } from './features/view-feature/view-feature.component';
+import { AddRoleComponent } from './role/add-role/add-role.component';
+import { ViewRoleComponent } from './role/view-role/view-role.component';
+import { UpdateRoleComponent } from './role/update-role/update-role.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
 
 
 // *******************************************************************************
@@ -82,7 +91,7 @@ const routes: Routes = [
   ]},
 
   { path: 'projects/view', component: Layout1Component, children: [
-    { path: '', component: ViewProjectComponent },
+    { path: '', component: ViewProjectComponent }, //project id
   ]},
 
   { path: 'projects/add-runlog', component: Layout1Component, children: [
@@ -98,17 +107,51 @@ const routes: Routes = [
   ]},
 
   { path: 'projects/view/view-runlog', component: Layout1Component, children: [
-    { path: '', component: ViewRunlogComponent },
+    { path: '', component: ViewRunlogComponent }, //runlog id
   ]},
   
   { path: 'projects/view/view-testcase', component: Layout1Component, children: [
-    { path: '', component: ViewTestcaseComponent },
+    { path: '', component: ViewTestcaseComponent }, //testcase id
   ]},
 
   { path: 'projects/view/view-report', component: Layout1Component, children: [
-    { path: '', component: ViewReportComponent },
+    { path: '', component: ViewReportComponent }, //report id
   ]},
 
+  { path: 'features', component: Layout1Component, children: [
+    { path: '', component: AllFeaturesComponent },
+  ]},
+
+  { path: 'features/add-feature', component: Layout1Component, children: [
+    { path: '', component: AddFeatureComponent },
+  ]},
+
+  { path: 'features/view-feature', component: Layout1Component, children: [
+    { path: '', component: ViewFeatureComponent }, //featureid
+  ]},
+
+  { path: 'features/view-feature/update', component: Layout1Component, children: [
+    { path: '', component: UpdateFeatureComponent }, //featureid
+  ]},
+
+
+  { path: 'roles', component: Layout1Component, children: [
+    { path: '', component: AllRolesComponent },
+  ]},
+
+  { path: 'roles/add-role', component: Layout1Component, children: [
+    { path: '', component: AddRoleComponent },
+  ]},
+
+  { path: 'roles/view-role', component: Layout1Component, children: [
+    { path: '', component: ViewRoleComponent}, //role id
+  ]},
+
+  { path: 'roles/view-role/update', component: Layout1Component, children: [
+    { path: '', component: UpdateRoleComponent}, //role-id
+  ]},
+
+  {path:'server-error', component:ServerErrorComponent},
 
   // 404 Not Found page
   { path: '**', component: NotFoundComponent }

@@ -15,13 +15,12 @@ export class EditProfileComponent implements OnInit {
   firstName:string;
   lastName:string;
   emailAddress:string;
-  isSubmitted = false; 
   failedToGetDetails:boolean;
   editSuccessFul:boolean;
   editFailure:boolean;
   emailAlreadyRegistered=false; 
   uId:string;
-  editProfile=true;
+  emptyForm:boolean;
   editForm = new FormGroup({
     fName: new FormControl('',Validators.required),
     lName: new FormControl('',Validators.required),
@@ -45,12 +44,7 @@ export class EditProfileComponent implements OnInit {
   get f(){
     return this.editForm.controls;
   }
-  
-    toggleEdit(){
-      this.editProfile = !this.editProfile;
-      // route to url shortner page with copied url data and populate and generate it there
-    }
-    
+      
     setValue(){
       this.editForm.setValue({fName: this.firstName, lName:this.lastName, email:this.emailAddress});
     }
@@ -62,9 +56,6 @@ export class EditProfileComponent implements OnInit {
           this.firstName =data.fName;
           this.lastName =data.lName;
           this.emailAddress =data.email;
-          console.log(this.firstName);
-          console.log(this.lastName);
-          console.log(this.emailAddress);
           this.setValue();
         },
         error => {
@@ -75,8 +66,8 @@ export class EditProfileComponent implements OnInit {
   
     onSubmit() {   
       console.log(this.editForm.value);
-      this.isSubmitted=true;
       if (this.editForm.invalid) {
+        this.emptyForm=true;
          return;
       }
       console.log(this.editForm.value);
@@ -91,6 +82,10 @@ export class EditProfileComponent implements OnInit {
             this.editFailure = true;
           }
     )};
+
+    clear(){
+      this.ngOnInit();
+    }
   
     editSuccessFulAlert(){
       this.editSuccessFul = false;
@@ -98,6 +93,10 @@ export class EditProfileComponent implements OnInit {
   
     editFailureAlert(){
       this.editFailure = false;
+    }
+
+    closeEmptyFormAlert(){
+      this.emptyForm=false;
     }
   
 }

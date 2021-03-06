@@ -1,0 +1,154 @@
+
+  <div class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4"> 
+    <h5 class="display-4" style="font-size:x-large">Total Features: &nbsp; {{length}}</h5>
+    <button class="btn btn-primary" (click)="addFeature()"><span class="ion ion-md-add"></span>&nbsp; Add Feature</button>
+  </div>
+
+  
+  <div *ngIf="RemoveFeature" class="alert alert-success alert-dismissible fade show" role="alert">
+    The Feature has been <strong>Successfully</strong>  removed!!
+     <button type="button" (click)="RemoveFeatureAlert()" class="close" data-dismiss="alert" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+     </button>
+</div>
+
+
+  <div class="card">
+    
+    <!-- Table controls -->
+    <div class="card-body">
+  
+      <div class="row">
+        <div class="col">
+          Per page: &nbsp;
+          <select
+            [(ngModel)]="itemsPerPage"
+            (change)="update()"
+            class="custom-select custom-select-sm d-inline-block w-auto">
+            <option *ngFor="let limit of [10, 20, 30, 40, 50]">{{limit}}</option>
+          </select>
+        </div>
+        <div class="col">
+          <input type="text"
+            [(ngModel)]="filterVal"
+            (input)="currentPage = 1; update()"
+            class="form-control form-control-sm d-inline-block w-auto float-sm-right"
+            placeholder="Search...">
+        </div>
+      </div>
+  
+    </div>
+    <!-- / Table controls -->
+  
+    <!-- Table -->
+    <hr class="border-light m-0">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered card-table">
+        <thead >
+          <tr>
+            <th class="text-nowrap">
+              Sl.no
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('featureCode')">
+              Feature Code<i class="ion text-muted ml-2" *ngIf="sortBy=='featureCode'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('featureName')">
+              Feature Name<i class="ion text-muted ml-2" *ngIf="sortBy=='featureName'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('moduleName')">
+              Module Name<i class="ion text-muted ml-2" *ngIf="sortBy=='moduleName'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('createdOn')">
+              Created on<i class="ion text-muted ml-2" *ngIf="sortBy=='createdOn'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('createdBy')">
+              Created by<i class="ion text-muted ml-2" *ngIf="sortBy=='createdBy'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <!-- <th class="text-nowrap cursor-pointer" (click)="setSort('name')">
+              Name<i class="ion text-muted ml-2" *ngIf="sortBy=='name'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th> -->
+            <!-- <th class="text-nowrap cursor-pointer" (click)="setSort('latestActivity')">
+              Latest activity<i class="ion text-muted ml-2" *ngIf="sortBy=='latestActivity'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th> -->
+            <!-- <th class="text-nowrap cursor-pointer" (click)="setSort('verified')">
+              Verified<i class="ion text-muted ml-2" *ngIf="sortBy=='verified'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th> -->
+            <!-- <th class="text-nowrap cursor-pointer" (click)="setSort('role')">
+              Role<i class="ion text-muted ml-2" *ngIf="sortBy=='role'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('status')">
+              Status<i class="ion text-muted ml-2" *ngIf="sortBy=='status'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer">
+              Action
+            </th> -->
+          </tr>
+        </thead>
+        <tbody *ngFor="let feature of featuresData | paginate : { itemsPerPage: 10, currentPage: p }; let i=index "> 
+          <tr > <!--*ngFor="let user of usersData"-->
+            <td>{{ (currentPage - 1) * itemsPerPage + i +1 }}</td>
+            <td class="align-middle">{{feature.featureCode}}</td>
+            <td class="align-middle">{{feature.featureName}}</td> <!--<a routerLink="/users/profile/{{user._id}}"></a>-->
+            <td class="align-middle">{{feature.moduleName}}</td> 
+            <td class="align-middle">{{feature.createdOn}}</td> 
+            <td class="align-middle">{{feature.createdBy}}</td> 
+            <!-- <td class="align-middle">{{user.name}}</td> createdOn createdBy -->
+            <!-- <td class="align-middle">{{user.latestActivity}}</td> -->
+            <!-- <td class="align-middle">
+              <span class="ion" [ngClass]="{'ion-md-checkmark text-primary': user.verified, 'ion-md-close text-light': !user.verified}"></span>
+            </td> -->
+            <!-- <td class="align-middle">
+              <span *ngIf="user.role === 1">User</span>
+              <span *ngIf="user.role === 2">Author</span>
+              <span *ngIf="user.role === 3">Staff</span>
+              <span *ngIf="user.role === 4">Admin</span>
+              {{user.role}}
+            </td> -->
+            <!-- <td class="align-middle">
+              <span class="badge badge-outline-success" *ngIf="user.status === 1">Active</span>
+              <span class="badge badge-outline-danger" *ngIf="user.status === 2">Banned</span>
+              <span class="badge badge-outline-default" *ngIf="user.status === 3">Deleted</span>
+            </td> -->
+            <td class="text-center text-nowrap align-middle">
+              <!-- <a href="javascript:void(0)" class="btn btn-default btn-xs icon-btn md-btn-flat" ngbTooltip="Edit">
+                <i class="ion ion-md-create"></i>
+              </a> -->
+              <div class="btn-group" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+                <button type="button" class="btn btn-default btn-xs icon-btn md-btn-flat hide-arrow" ngbDropdownToggle ngbTooltip="Actions">
+                  <i class="ion ion-ios-settings"></i>
+                </button>
+                <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                  <!-- <a class="dropdown-item" routerLink="/users/profile/{{user._id}}">View</a> -->
+                  <!-- <a class="dropdown-item" href="javascript:void(0)">Ban user</a> -->
+                  <a class="dropdown-item" (click)="removeFeature(feature._id)">Remove</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- / Table -->
+  
+    <!-- Pagination -->
+    <div class="card-body py-0">
+  
+      <div class="row">
+        <div class="col-sm text-sm-left text-center pt-3">
+          <span class="text-muted" *ngIf="totalItems">Page {{ currentPage }} of {{ totalPages }}</span>
+        </div>
+        <div class="col-sm pt-3">
+          <ngb-pagination
+            [collectionSize]="totalItems"
+            [pageSize]="itemsPerPage"
+            [(page)]="currentPage"
+            (pageChange)="update()"
+            size="sm"
+            class="d-flex justify-content-center justify-content-sm-end m-0"></ngb-pagination>
+        </div>
+      </div>
+  
+    </div>
+    <!-- / Pagination -->
+  </div>
+  
