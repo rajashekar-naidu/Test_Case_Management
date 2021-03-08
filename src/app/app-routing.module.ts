@@ -41,6 +41,7 @@ import { AddRoleComponent } from './role/add-role/add-role.component';
 import { ViewRoleComponent } from './role/view-role/view-role.component';
 import { UpdateRoleComponent } from './role/update-role/update-role.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
+import { BlockedComponent } from './users/blocked/blocked.component';
 
 
 // *******************************************************************************
@@ -51,6 +52,7 @@ const routes: Routes = [
   {path:'confirm-page', component:ConfirmPageComponent},
   {path:'designation', component:DesignationComponent},
  {path:'token-expired-page', component:TokenExpiredComponent},
+ {path:'blocked', component:BlockedComponent},
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
@@ -126,11 +128,11 @@ const routes: Routes = [
     { path: '', component: AddFeatureComponent },
   ]},
 
-  { path: 'features/view-feature', component: Layout1Component, children: [
+  { path: 'features/view-feature/:id', component: Layout1Component, children: [
     { path: '', component: ViewFeatureComponent }, //featureid
   ]},
 
-  { path: 'features/view-feature/update', component: Layout1Component, children: [
+  { path: 'features/view-feature/update/:id', component: Layout1Component, children: [
     { path: '', component: UpdateFeatureComponent }, //featureid
   ]},
 
@@ -143,11 +145,11 @@ const routes: Routes = [
     { path: '', component: AddRoleComponent },
   ]},
 
-  { path: 'roles/view-role', component: Layout1Component, children: [
+  { path: 'roles/view-role/:id', component: Layout1Component, children: [
     { path: '', component: ViewRoleComponent}, //role id
   ]},
 
-  { path: 'roles/view-role/update', component: Layout1Component, children: [
+  { path: 'roles/view-role/update/:id', component: Layout1Component, children: [
     { path: '', component: UpdateRoleComponent}, //role-id
   ]},
 

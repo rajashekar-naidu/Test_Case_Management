@@ -20,11 +20,16 @@ constructor(private _appService: AppService, private _auth:AuthService, private 
 }
 
   ngOnInit() {
+    if(!localStorage.getItem('token')){
     this.loginForm = this._formBuilder.group({
       email : ['', [Validators.required, Validators.email]],
       password : ['', [Validators.required, Validators.pattern(this.passPattern)]],
     });
+  } else {
+    this._router.navigate(['/dashboard']);
   }
+  }
+
 
   get formControls() { return this.loginForm.controls; }
 
@@ -39,10 +44,14 @@ constructor(private _appService: AppService, private _auth:AuthService, private 
     .subscribe(
       res => {
         console.log(res);
-       localStorage.setItem('token', res.data.token);
-       localStorage.setItem('uId', res.data.userId);
-       localStorage.setItem('role',res.data.role);
-        this._router.navigate(['/dashboard'])
+        if(res.data.userStatus === "Active"){
+           localStorage.setItem('token', res.data.token);
+           localStorage.setItem('uId', res.data.userId);
+           localStorage.setItem('role',res.data.role);
+          this._router.navigate(['/dashboard'])
+        } else{
+          this._router.navigate(['/blocked'])
+        }
       },
       err => {
         console.log(err.message);
@@ -56,7 +65,7 @@ constructor(private _appService: AppService, private _auth:AuthService, private 
         //  this.loginForm.reset({});
         }
         
-       if(err.message === "Http failure response for http://192.168.1.139:9000: 0 Unknown Error")
+       if(err.message === "Http failure response for http://192.168.1.139:3000: 0 Unknown Error")
          this.serverError=true;
       } 
     )}

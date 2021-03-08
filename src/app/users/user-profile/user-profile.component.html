@@ -1,193 +1,196 @@
 
 <div class="row">
-<div class="media align-items-center row col-md-3 mb-4">
-    <h3 class="display-4">Profile:</h3>
-    <img [src]="'assets/img/avatars/4.png'" alt="" class="d-block ui-w-180 rounded">
-</div>
-<div class="col-md-9">
-<div class="media-body text-right mb-2">
-  <a routerLink="/users/profile/edit/{{uId}}" class="btn btn-danger btn-md">Block</a>&nbsp;
-  <a routerLink="/users/profile/edit/{{uId}}" class="btn btn-primary btn-md">Edit</a>&nbsp;
-</div>
-
-<div class="card col-md-12 mb-4">
-  <div class="card-body">
-
-    <table class="table user-view-table m-0">
-      <tbody>
-        <tr>
-          <td>User ID:</td>
-          <td>{{uId}}</td>
-        </tr>
-        <tr>
-          <td>Name:</td>
-          <td>{{fName}} {{lName}}</td>
-        </tr>
-        <tr>
-          <td>E-mail:</td>
-          <td>{{email}}</td>
-        </tr>
-        <tr>
-          <td>Phone:</td>
-          <td>984537634874</td>
-        </tr>
-        <tr>
-          <td>Role:</td>
-          <td>Fresher</td>
-        </tr>
-        <tr>
-          <td>Registered:</td>
-          <td>{{registeredDate}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="media align-items-center row col-md-3 mb-4">
+      <h3 class="display-4">Profile:</h3>
+      <img [src]="'assets/img/avatars/4.png'" alt="" class="d-block ui-w-180 rounded">
   </div>
-</div>
-</div>
-</div>
-  
-<div class="col-lg-12 row">
-
-  <div class="card col m-1 mb-4">
-    <div class="card-body">
-      <table class="table user-view-table m-0">
-        <tbody>
-          <tr>
-            <td>Total Projects:</td>
-            <td>10</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="col-md-9">
+    <div class="media-body text-right mb-2">
+          <a (click)="onBlock()" *ngIf="!block" class="btn btn-danger text-white btn-md">Block</a>&nbsp;
+          <a (click)="onUnblock()" *ngIf="block" class="btn btn-success text-white btn-md">Unblock</a>&nbsp;
+          <a routerLink="/users/profile/edit/{{uId}}" class="btn btn-primary btn-md">Edit</a>&nbsp;
     </div>
-  </div>
-
-  <div class="card col m-1 mb-4">
-    <div class="card-body">
-      <table class="table user-view-table m-0">
-        <tbody>
-          <tr>
-            <td>Projects Closed:</td>
-            <td>7</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="card col m-1 mb-4">
-    <div class="card-body">
-      <table class="table user-view-table m-0">
-        <tbody>
-          <tr>
-            <td>Projects Running:</td>
-            <td>3</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<ngb-tabset class="nav-tabs-top mb-4">
-  <ngb-tab title="Reports">
-    <ng-template ngbTabContent>
+    <div class="card col-md-12 mb-4">
       <div class="card-body">
-        <div  class="media pb-1 mb-3"> <!--*ngFor="let activity of projectData.activities"-->
-          <div class="ui-feed-icon-container">
-            <table class="table user-view-table m-0">
-              <thead>
-              <tr>
-                <th>report code</th>
-                <th>Project Name</th>
-                <th>Expected Results</th>
-                <th>Actual Results</th>
-                <th>Testcases Passed</th>
-                <th>Testcases Failed</th>
-              </tr>
-              </thead>
+          <table class="table user-view-table m-0">
               <tbody>
                 <tr>
-                  <td>R0003</td>
-                  <td>Project2</td>
-                  <td>80%</td>
-                  <td>70%</td>
-                  <td>35</td>
-                  <td>15</td>
+                  <td>User ID:</td>
+                  <td>{{uId}}</td>
                 </tr>
                 <tr>
-                  <td>R0012</td>
-                  <td>Project4</td>
-                  <td>80%</td>
-                  <td>90%</td>
-                  <td>62</td>
-                  <td>6</td>
+                  <td>Name:</td>
+                  <td>{{fName}} {{lName}}</td>
                 </tr>
                 <tr>
-                  <td>R0008</td>
-                  <td>Project8</td>
-                  <td>80%</td>
-                  <td>60%</td>
-                  <td>89</td>
-                  <td>58</td>
+                  <td>E-mail:</td>
+                  <td>{{email}}</td>
+                </tr>
+                <tr>
+                  <td>Phone:</td>
+                  <td>984537634874</td>
+                </tr>
+                <tr>
+                  <td>Role:</td>
+                  <td>{{role}}</td>
+                </tr>
+                <tr>
+                  <td>Registered:</td>
+                  <td>{{registeredDate}}</td>
+                </tr>
+                <tr>
+                  <td>Status:</td>
+                  <td>{{status}}</td>
                 </tr>
               </tbody>
-            </table>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <div class="col-lg-12 row">
+
+    <div class="card col m-1 mb-4">
+      <div class="card-body">
+        <table class="table user-view-table m-0">
+          <tbody>
+            <tr>
+              <td>Total Projects:</td>
+              <td>10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card col m-1 mb-4">
+      <div class="card-body">
+        <table class="table user-view-table m-0">
+          <tbody>
+            <tr>
+              <td>Projects Closed:</td>
+              <td>7</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card col m-1 mb-4">
+      <div class="card-body">
+        <table class="table user-view-table m-0">
+          <tbody>
+            <tr>
+              <td>Projects Running:</td>
+              <td>3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ngb-tabset class="nav-tabs-top mb-4">
+    <ngb-tab title="Reports">
+      <ng-template ngbTabContent>
+        <div class="card-body">
+          <div  class="media pb-1 mb-3"> <!--*ngFor="let activity of projectData.activities"-->
+            <div class="ui-feed-icon-container">
+              <table class="table user-view-table m-0">
+                <thead>
+                <tr>
+                  <th>report code</th>
+                  <th>Project Name</th>
+                  <th>Expected Results</th>
+                  <th>Actual Results</th>
+                  <th>Testcases Passed</th>
+                  <th>Testcases Failed</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>R0003</td>
+                    <td>Project2</td>
+                    <td>80%</td>
+                    <td>70%</td>
+                    <td>35</td>
+                    <td>15</td>
+                  </tr>
+                  <tr>
+                    <td>R0012</td>
+                    <td>Project4</td>
+                    <td>80%</td>
+                    <td>90%</td>
+                    <td>62</td>
+                    <td>6</td>
+                  </tr>
+                  <tr>
+                    <td>R0008</td>
+                    <td>Project8</td>
+                    <td>80%</td>
+                    <td>60%</td>
+                    <td>89</td>
+                    <td>58</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+
         </div>
+      </ng-template>
+    </ngb-tab>
 
-      </div>
-    </ng-template>
-  </ngb-tab>
+    <ngb-tab title="Test Cases">
+      <ng-template ngbTabContent>
 
-  <ngb-tab title="Test Cases">
-    <ng-template ngbTabContent>
+        <div class="card-body">
 
-      <div class="card-body">
-
-        <div class="media mb-3"> <!--*ngFor="let message of projectData.discussion"-->
-          <div class="ui-feed-icon-container">
-            <table class="table user-view-table m-0">
-              <thead>
-              <tr>
-                <th>Testcase code</th>
-                <th>Testcase name</th>
-                <th>Status</th>
-              </tr>
-              </thead>
-              <tbody>
+          <div class="media mb-3"> <!--*ngFor="let message of projectData.discussion"-->
+            <div class="ui-feed-icon-container">
+              <table class="table user-view-table m-0">
+                <thead>
                 <tr>
-                  <td>T0042</td>
-                  <td>Testcase42</td>
-                  <td>pass</td>
+                  <th>Testcase code</th>
+                  <th>Testcase name</th>
+                  <th>Status</th>
                 </tr>
-                <tr>
-                  <td>T0084</td>
-                  <td>Testcase84</td>
-                  <td>failed</td>
-                </tr>
-                <tr>
-                  <td>T0134</td>
-                  <td>Testcase134</td>
-                  <td>pass</td>
-                </tr>
-                <tr>
-                  <td>T0002</td>
-                  <td>Testcase42</td>
-                  <td>pass</td>
-                </tr>
-                <tr>
-                  <td>T0158</td>
-                  <td>Testcase158</td>
-                  <td>pass</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>  
-      </div>
-    </ng-template>
-  </ngb-tab>
-</ngb-tabset>
-  
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>T0042</td>
+                    <td>Testcase42</td>
+                    <td>pass</td>
+                  </tr>
+                  <tr>
+                    <td>T0084</td>
+                    <td>Testcase84</td>
+                    <td>failed</td>
+                  </tr>
+                  <tr>
+                    <td>T0134</td>
+                    <td>Testcase134</td>
+                    <td>pass</td>
+                  </tr>
+                  <tr>
+                    <td>T0002</td>
+                    <td>Testcase42</td>
+                    <td>pass</td>
+                  </tr>
+                  <tr>
+                    <td>T0158</td>
+                    <td>Testcase158</td>
+                    <td>pass</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>  
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+    
 
   

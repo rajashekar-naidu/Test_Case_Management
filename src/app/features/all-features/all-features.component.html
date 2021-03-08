@@ -46,8 +46,8 @@
       <table class="table table-striped table-bordered card-table">
         <thead >
           <tr>
-            <th class="text-nowrap">
-              Sl.no
+            <th class="text-nowrap cursor-pointer" (click)="setSort('id')">
+              Sl.no<i class="ion text-muted ml-2" *ngIf="sortBy=='id'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
             </th>
             <th class="text-nowrap cursor-pointer" (click)="setSort('featureCode')">
               Feature Code<i class="ion text-muted ml-2" *ngIf="sortBy=='featureCode'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
@@ -63,6 +63,12 @@
             </th>
             <th class="text-nowrap cursor-pointer" (click)="setSort('createdBy')">
               Created by<i class="ion text-muted ml-2" *ngIf="sortBy=='createdBy'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('modifiedOn')">
+              Modified on<i class="ion text-muted ml-2" *ngIf="sortBy=='modifiedOn'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('modifiedBy')">
+              Modified by<i class="ion text-muted ml-2" *ngIf="sortBy=='modifiedBy'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
             </th>
             <!-- <th class="text-nowrap cursor-pointer" (click)="setSort('name')">
               Name<i class="ion text-muted ml-2" *ngIf="sortBy=='name'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
@@ -84,7 +90,7 @@
             </th> -->
           </tr>
         </thead>
-        <tbody *ngFor="let feature of featuresData | paginate : { itemsPerPage: 10, currentPage: p }; let i=index "> 
+        <tbody *ngFor="let feature of featuresData | paginate : { itemsPerPage: itemsPerPage , currentPage: p }; let i=index "> 
           <tr > <!--*ngFor="let user of usersData"-->
             <td>{{ (currentPage - 1) * itemsPerPage + i +1 }}</td>
             <td class="align-middle">{{feature.featureCode}}</td>
@@ -92,6 +98,8 @@
             <td class="align-middle">{{feature.moduleName}}</td> 
             <td class="align-middle">{{feature.createdOn}}</td> 
             <td class="align-middle">{{feature.createdBy}}</td> 
+            <td class="align-middle">{{feature.modifiedOn}}</td> 
+            <td class="align-middle">{{feature.modifiedBy}}</td> 
             <!-- <td class="align-middle">{{user.name}}</td> createdOn createdBy -->
             <!-- <td class="align-middle">{{user.latestActivity}}</td> -->
             <!-- <td class="align-middle">
@@ -118,7 +126,7 @@
                   <i class="ion ion-ios-settings"></i>
                 </button>
                 <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
-                  <!-- <a class="dropdown-item" routerLink="/users/profile/{{user._id}}">View</a> -->
+                  <a class="dropdown-item" routerLink="/features/view-feature/{{feature._id}}">View</a>
                   <!-- <a class="dropdown-item" href="javascript:void(0)">Ban user</a> -->
                   <a class="dropdown-item" (click)="removeFeature(feature._id)">Remove</a>
                 </div>

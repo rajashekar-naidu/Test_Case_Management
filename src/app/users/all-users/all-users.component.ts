@@ -48,7 +48,7 @@ export class AllUsersComponent implements OnInit {
   // Table
 
   // Options
-  searchKeys = ['id', 'name', 'email'];
+  searchKeys = ['id','_id', 'fName', 'email', 'role', ];
   sortBy = 'id';
   sortDesc = true;
   itemsPerPage = 10;

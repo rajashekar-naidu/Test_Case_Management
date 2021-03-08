@@ -66,6 +66,7 @@ import { AllRolesComponent } from './role/all-roles/all-roles.component';
 import { ViewFeatureComponent } from './features/view-feature/view-feature.component';
 import { ViewRoleComponent } from './role/view-role/view-role.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
+import { BlockedComponent } from './users/blocked/blocked.component';
 
 
 
@@ -110,6 +111,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     ViewFeatureComponent,
     ViewRoleComponent,
     ServerErrorComponent,
+    BlockedComponent,
 
 
   ],

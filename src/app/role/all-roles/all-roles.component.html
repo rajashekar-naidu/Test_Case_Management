@@ -39,8 +39,8 @@
       <table class="table table-striped table-bordered card-table">
         <thead >
           <tr>
-            <th class="text-nowrap">
-              Sl.no
+            <th class="text-nowrap cursor-pointer" (click)="setSort('id')">
+              Sl.no <i class="ion text-muted ml-2" *ngIf="sortBy=='id'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
             </th>
             <th class="text-nowrap cursor-pointer" (click)="setSort('roleCode')">
               Role Code<i class="ion text-muted ml-2" *ngIf="sortBy=='roleCode'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
@@ -52,10 +52,16 @@
               Feature<i class="ion text-muted ml-2" *ngIf="sortBy=='feature[0]'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
             </th>
             <th class="text-nowrap cursor-pointer" (click)="setSort('createdOn')">
-              created on<i class="ion text-muted ml-2" *ngIf="sortBy=='createdOn'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+              Created on<i class="ion text-muted ml-2" *ngIf="sortBy=='createdOn'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
             </th>
             <th class="text-nowrap cursor-pointer" (click)="setSort('createdBy')">
-                created by<i class="ion text-muted ml-2" *ngIf="sortBy=='createdBy'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+                Created by<i class="ion text-muted ml-2" *ngIf="sortBy=='createdBy'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('modifiedOn')">
+              Modified on<i class="ion text-muted ml-2" *ngIf="sortBy=='modifiedOn'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
+            </th>
+            <th class="text-nowrap cursor-pointer" (click)="setSort('modifiedBy')">
+                Modified by<i class="ion text-muted ml-2" *ngIf="sortBy=='modifiedBy'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
             </th>
             <!-- <th class="text-nowrap cursor-pointer" (click)="setSort('name')">
               Name<i class="ion text-muted ml-2" *ngIf="sortBy=='name'" [ngClass]="'ion-md-arrow-' + (sortDesc ? 'down' : 'up')"></i>
@@ -77,14 +83,16 @@
             </th> -->
           </tr>
         </thead>
-        <tbody *ngFor="let role of rolesData | paginate : { itemsPerPage: 10, currentPage: p }; let i=index "> 
+        <tbody *ngFor="let role of rolesData | paginate : { itemsPerPage: itemsPerPage, currentPage: p }; let i=index "> 
           <tr > <!--*ngFor="let user of usersData"-->
             <td>{{ (currentPage - 1) * itemsPerPage + i +1 }}</td>
             <td class="align-middle">{{role.roleCode}}</td>
             <td class="align-middle">{{role.roleName}}</td> <!--<a routerLink="/users/profile/{{user._id}}"></a>-->
-            <td class="align-middle">{{role.feature[0]}}</td>
+            <td class="align-middle">{{role.feature}}</td>
             <td class="align-middle">{{role.createdOn}}</td>
             <td class="align-middle">{{role.createdBy}}</td>
+            <td class="align-middle">{{role.modifiedOn}}</td>
+            <td class="align-middle">{{role.modifiedBy}}</td>
             <!-- <td class="align-middle">{{user.name}}</td> -->
             <!-- <td class="align-middle">{{user.latestActivity}}</td> -->
             <!-- <td class="align-middle">
@@ -111,10 +119,10 @@
                   <i class="ion ion-ios-settings"></i>
                 </button>
                 <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
-                  <!-- <a class="dropdown-item" routerLink="/users/profile/{{user._id}}">View</a> -->
+                  <a class="dropdown-item" routerLink="/roles/view-role/{{role._id}}">View</a>
                   <!-- <a class="dropdown-item" href="javascript:void(0)">Ban user</a> -->
                   <a class="dropdown-item" (click)="removeRole(role._id)">Remove</a>
-                </div>
+                </div>  
               </div>
             </td>
           </tr>

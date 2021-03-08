@@ -22,8 +22,8 @@ export class AllFeaturesComponent implements OnInit {
       this.isRTL = _appService.isRTL;
    }
 
-   searchKeys = ['featureCode', 'featureName', 'moduleName', 'createdOn', 'createdBy'];
-  sortBy = 'featureCode';
+   searchKeys = ['id','featureCode', 'featureName', 'moduleName', 'createdOn', 'createdBy'];
+  sortBy = 'id';
   sortDesc = true;
   itemsPerPage = 10;
 
@@ -41,9 +41,7 @@ export class AllFeaturesComponent implements OnInit {
 
   update() {
     const data = this.filter(this.originalFeaturesData);
-
     this.totalItems = data.length;
-
     this.sort(data);
     this.featuresData = this.paginate(data);
 
@@ -76,10 +74,10 @@ export class AllFeaturesComponent implements OnInit {
     });
   }
 
-  paginate(data) {
+  paginate(data) {    
     const itemsPerPage = parseInt(String(this.itemsPerPage), 10);
+    console.log(itemsPerPage);
     const offset = (this.currentPage - 1) * itemsPerPage;
-
     return data.slice(offset, offset + itemsPerPage);
   }
 

@@ -16,6 +16,13 @@
      </button>
   </div>
 
+  <div *ngIf="failed" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Failed</strong> to add the Project!
+     <button type="button" (click)="closeSuccessfulAlert()" class="close" data-dismiss="alert" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+
     <h6 class="card-header">
       Add Project
     </h6>
@@ -24,14 +31,14 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-2 text-sm-right">Project Name</label>
             <div class="col-sm-10">
-              <input type="text" formControlName="projectName" class="form-control" placeholder="Project Name">
+              <input type="text" formControlName="nameOfProject" class="form-control" placeholder="Project Name">
             </div>
         </div>
 
         <div class="form-group row"> <!-- [ngClass]="{ 'has-error': addUserForm.get('priority').errors && (addUserForm.get('priority').touched || addUserForm.get('priority').dirty)}" -->
             <label class="col-form-label col-sm-2 text-sm-right">Handled by</label>
             <div class="col-sm-10">
-            <select class="form-control" formControlName="id" id="name">
+            <select class="form-control" formControlName="handledBy" id="handledBy">
                 <option value="" disabled selected hidden>Select Name</option>
                 <option *ngFor="let originalUserData of originalUsersData" [ngValue]="originalUserData._id" >{{ originalUserData.fName}} {{ originalUserData.lName}}</option>
             </select>
@@ -42,14 +49,14 @@
         <div class="form-group row">
           <label class="col-form-label col-sm-2 text-sm-right">Description</label>
           <div class="col-sm-10">
-            <textarea class="form-control" formControlName="description" placeholder="Description"></textarea>
+            <textarea class="form-control" formControlName="projectDescription" placeholder="Description"></textarea>
           </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2 text-sm-right">Start Date</label>
               <div class="input-group col-sm-10">
-                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="fromDate"
+                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate"
                   ngbDatepicker [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"
                   [placement]="isRTL ? 'bottom-left' : 'bottom-right'"
                   #d1="ngbDatepicker">
@@ -64,7 +71,7 @@
         <div class="form-group row">
           <label class="col-form-label col-sm-2 text-sm-right">End Date</label>
             <div class="input-group col-sm-10">
-              <input class="form-control" placeholder="yyyy-mm-dd" formControlName="toDate"
+              <input class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate"
                 ngbDatepicker
                 [placement]="isRTL ? 'bottom-left' : 'bottom-right'"
                 #d2="ngbDatepicker">

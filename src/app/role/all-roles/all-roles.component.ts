@@ -22,8 +22,8 @@ export class AllRolesComponent implements OnInit {
       this.isRTL = _appService.isRTL;
     }
 
-    searchKeys = ['roleCode', 'roleName'];
-    sortBy = 'roleCode';
+    searchKeys = ['id','roleCode', 'roleName'];
+    sortBy = 'id';
     sortDesc = true;
     itemsPerPage = 10;
   
@@ -109,7 +109,6 @@ export class AllRolesComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
-          
           this.originalRolesData = data.slice(0);
           this.length = this.originalRolesData.length;
           console.log(this.originalRolesData);

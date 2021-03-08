@@ -1,1 +1,66 @@
-<p>view-role works!</p>
+
+
+<div class="row">
+
+    <div *ngIf="sucessful" class="alert alert-success alert-dismissible fade show" role="alert">
+        Role has been Successfully <strong>Deleted!!</strong> 
+         <button type="button" (click)="deleteSuccessfulAlert()" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button> 
+    </div> 
+
+    <div *ngIf="failed" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Failed to <strong>Delete</strong> the Role.
+         <button type="button" (click)="deleteFailedAlert()" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button> 
+    </div> 
+
+    <div class="media align-items-center row col-md-6 mb-4">
+        <h3 class="display-4">Role: {{roleName}}</h3>
+    </div>
+    <div class="media-body text-right mb-2">
+        <a (click)="deleteRole(rId)" class="btn btn-danger btn-md text-white">delete</a>&nbsp;
+        <a routerLink="/roles/view-role/update/{{rId}}" class="btn btn-primary btn-md">Edit</a>&nbsp;
+  </div>
+    <div class="col-md-12">
+
+      <div class="card col-md-12 mb-4">
+        <div class="card-body">
+            <table class="table user-view-table m-0">
+                <tbody>
+                  <tr>
+                    <td>Role Code:</td>
+                    <td>{{roleCode}}</td>
+                  </tr>
+                  <tr>
+                    <td>Role Name:</td>
+                    <td>{{roleName}}</td>
+                  </tr>
+                  <tr>
+                    <td>Feature Code:</td>
+                    <td>{{featureCode}}</td>
+                  </tr>
+                  <tr>
+                    <td>Created By:</td>
+                    <td>{{createdBy}}</td>
+                  </tr>
+                  <tr>
+                    <td>Created on:</td>
+                    <td>{{createdOn}}</td>
+                  </tr>
+                <tr>
+                  <td>Modified By:</td>
+                  <td>{{modifiedBy}}</td>
+                </tr>
+                <tr>
+                  <td>Modified on:</td>
+                  <td>{{modifiedOn}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+

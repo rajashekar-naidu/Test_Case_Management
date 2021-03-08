@@ -16,9 +16,9 @@ import { AuthService } from 'src/app/_services/auth.services';
 })
 export class AllProjectsComponent implements OnInit {
   isRTL: boolean;
-  users:any;
-  cantFetchAllUserDetails:boolean;
-  cantRemoveUser:boolean;
+  projects:any;
+  cantFetchProjectDetails:boolean;
+  cantRemoveProject:boolean;
   length;
 
   hoveredDate: NgbDate | null = null;
@@ -33,7 +33,6 @@ export class AllProjectsComponent implements OnInit {
     ) { 
     this._appService.pageTitle = 'Projects';
     this.isRTL = _appService.isRTL;
-    this.loadData();
   }
 
    // Filters
@@ -49,7 +48,6 @@ export class AllProjectsComponent implements OnInit {
   // Table
 
   // Options
-  dataUrl = 'assets/json/pages_users_list.json';
   searchKeys = ['id', 'account', 'email', 'name'];
   sortBy = 'id';
   sortDesc = true;
@@ -59,8 +57,8 @@ export class AllProjectsComponent implements OnInit {
   currentPage = 1;
   totalItems = 0;
 
-  usersData: object[] = [];
-  originalUsersData: object[] = [];
+  projectsData: object[] = [];
+  originalProjectsData: object[] = [];
 
   
   onDateSelection(date: NgbDate) {
@@ -92,27 +90,17 @@ export class AllProjectsComponent implements OnInit {
   }
 
 
-
-
-  loadData() {
-    this.http.get(this.dataUrl)
-      .subscribe((data: any) => {
-        this.originalUsersData = data.slice(0);
-        this.update();
-      });
-  }
-
   get totalPages() {
     return Math.ceil(this.totalItems / this.perPage);
   }
 
   update() {
-    const data = this.filter(this.originalUsersData);
+    const data = this.filter(this.originalProjectsData);
 
     this.totalItems = data.length;
 
     this.sort(data);
-    this.usersData = this.paginate(data);
+    this.projectsData = this.paginate(data);
   }
 
   filter(data) {
@@ -160,6 +148,41 @@ export class AllProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
+      //   if(this._auth.getRole()==="User")
+  //   this._router.navigate(['/shorturl']);
+  // if(this._auth.getRole()===false)
+  //   this._router.navigate(['/']);
+  this.getProjectDetails();
+  // this.getRoleByID();
+  }
+
+  getProjectDetails(){
+    this._auth.getAllProjects()
+    .subscribe(
+      data => {
+        this.originalProjectsData = data.slice(0);
+        this.length = this.originalProjectsData.length;
+        console.log(this.originalProjectsData);
+        this.update();
+      },
+      error => {
+        console.log(error);
+        this.cantFetchProjectDetails = true;
+      });
+  }
+
+  removeUser(uId){
+    this._auth.removeUser(uId)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.ngOnInit();
+        },
+        err => {
+          console.log(err);
+          this.cantRemoveProject = true;
+        }
+      )
   }
 
   addProject(){
@@ -169,6 +192,14 @@ export class AllProjectsComponent implements OnInit {
   viewProject(){
     this._router.navigate(['/projects/view']);
   }
+  
+  
+  cantFetchDetailsAlert(){
+    this.cantFetchProjectDetails=false;
+  }
 
+  cantRemoveAlert(){
+    this.cantRemoveProject=false;
+  }
 
 }

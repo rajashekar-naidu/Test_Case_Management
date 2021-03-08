@@ -20,6 +20,7 @@ export class AddProjectComponent implements OnInit {
   addProjectForm:FormGroup;
   emptyForm:boolean;
   successful:boolean;
+  failed:boolean;
   now = new Date();
 
   hoveredDate: NgbDate | null = null;
@@ -40,11 +41,11 @@ export class AddProjectComponent implements OnInit {
   ngOnInit() {
     this.getAllUserDetails();
     this.addProjectForm = this._formBuilder.group({
-      projectName:['',Validators.required],
-      id:['',Validators.required],
-      description : ['', Validators.required],
-      fromDate : ['', Validators.required],
-      toDate : ['', Validators.required],
+      nameOfProject:['',Validators.required],
+      handledBy:['',Validators.required],
+      projectDescription : ['', Validators.required],
+      startDate : ['', Validators.required],
+      endDate : ['', Validators.required],
     });
   }
 
@@ -67,29 +68,27 @@ export class AddProjectComponent implements OnInit {
 
 
   onSubmit() {    
-    console.log(this.addProjectForm.value);
+    
     if (this.addProjectForm.invalid) {
+      console.log(this.addProjectForm.value);
       this.emptyForm=true;
       return;
     }
     console.log(this.addProjectForm.value);
-    this.successful=true;
-    // this._auth.registerUser(this.addProjectForm.value)
-    // .subscribe(
-    //     res => {
-    //       console.log(res);
-         // this._router.navigate(['/confirm-page']);
-        // },
-        // err => {
-          // console.log(err.error.errors.email);
-          // if(err.error.errors.email === "that email is already registered")
-          //   this.emailAlreadyRegistered=true;
-
-          // if(err.name === "HttpErrorResponse")
-          //   this.serverError=true;
-
-//         })
-//     this.addUserForm.reset();
+    this._auth.assignProject(this.addProjectForm.value)
+    .subscribe(
+        res => {
+          console.log(res);
+          if(res){
+            this.successful=true;
+          }
+        },
+        err => {
+          if(err){
+            this.failed = true;
+          }
+        })
+    this.addProjectForm.reset();
   }
 
 closeEmptyFormAlert(){
@@ -98,6 +97,10 @@ closeEmptyFormAlert(){
 
 closeSuccessfulAlert(){
   this.successful=false;
+}
+
+closeFailedAlert(){
+  this.failed=false;
 }
 
 
